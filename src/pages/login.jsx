@@ -1,9 +1,9 @@
 import Input from "@/components/common/functions/Input";
 
-export default function login() {
+export default function Login() {
   return (
     <>
-      <Input />
+      <Input label="Email" name="email" placeholder="john@gmail.com" />
     </>
   );
 }
