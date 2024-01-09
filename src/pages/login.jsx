@@ -2,11 +2,12 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import Input from "@/components/common/functions/Input";
-import LoadingButton from "@/components/common/functions/LoadingButton";
+import Input from "@/components/functions/Input";
+import LoadingButton from "@/components/functions/LoadingButton";
 import userApi from "@/api/modules/users.api";
 import { setUser } from "@/redux/features/userSlice";
 import { useRouter } from "next/router";
+import { toast } from "react-toastify";
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -15,7 +16,7 @@ export default function Login() {
   const [isLoginRequest, setIsLoginRequest] = useState(false);
   const [errorMessage, setErrorMessage] = useState(undefined);
 
-  const signUpForm = useFormik({
+  const signInForm = useFormik({
     initialValues: {
       email: "",
       password: "",
@@ -30,43 +31,42 @@ export default function Login() {
       setIsLoginRequest(true);
       const { response, error } = await userApi.signIn(values);
       setIsLoginRequest(false);
-
       if (response) {
-        signUpForm.resetForm();
+        signInForm.resetForm();
         dispatch(setUser(response));
+        toast.success("Login success");
         router.push("/");
       }
-
       if (error) setErrorMessage(error.message);
     },
   });
 
   return (
-    <form className="flex flex-col gap-4" onSubmit={signUpForm.handleSubmit}>
+    <form className="flex flex-col gap-4" onSubmit={signInForm.handleSubmit}>
       <Input
         label="Email"
         name="email"
         placeholder="john@gmail.com"
         type="email"
-        value={signUpForm.values.email}
-        onChange={signUpForm.handleChange}
+        value={signInForm.values.email}
+        onChange={signInForm.handleChange}
         error={
-          signUpForm.touched.email && signUpForm.errors.email !== undefined
+          signInForm.touched.email && signInForm.errors.email !== undefined
         }
-        helperText={signUpForm.touched.email && signUpForm.errors.email}
+        helperText={signInForm.touched.email && signInForm.errors.email}
       />
       <Input
         label="Password"
         name="password"
         placeholder="********"
         type="password"
-        value={signUpForm.values.password}
-        onChange={signUpForm.handleChange}
+        value={signInForm.values.password}
+        onChange={signInForm.handleChange}
         error={
-          signUpForm.touched.password &&
-          signUpForm.errors.password !== undefined
+          signInForm.touched.password &&
+          signInForm.errors.password !== undefined
         }
-        helperText={signUpForm.touched.password && signUpForm.errors.password}
+        helperText={signInForm.touched.password && signInForm.errors.password}
       />
 
       <LoadingButton type="submit" loading={isLoginRequest}>

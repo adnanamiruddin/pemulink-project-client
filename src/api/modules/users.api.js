@@ -4,7 +4,7 @@ import privateClient from "../clients/private.client";
 const usersEndpoint = {
   signUp: "/users/sign-up",
   signIn: "/users/sign-in",
-  getProfile: "/users/profile",
+  profile: "/users/profile",
   updateToAdmin: ({ id }) => `/users/update-to-admin/${id}`,
 };
 
@@ -37,7 +37,30 @@ const userApi = {
 
   getProfile: async () => {
     try {
-      const response = await privateClient.get(usersEndpoint.getProfile);
+      const response = await privateClient.get(usersEndpoint.profile);
+      return { response };
+    } catch (error) {
+      return { error };
+    }
+  },
+
+  updateProfile: async ({
+    email,
+    fullName,
+    age,
+    city,
+    address,
+    phoneNumber,
+  }) => {
+    try {
+      const response = await privateClient.put(usersEndpoint.profile, {
+        email,
+        fullName,
+        age,
+        city,
+        address,
+        phoneNumber,
+      });
       return { response };
     } catch (error) {
       return { error };

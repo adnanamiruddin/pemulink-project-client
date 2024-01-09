@@ -7,6 +7,7 @@ export default function Input({
   onChange,
   error,
   helperText,
+  disabled,
 }) {
   return (
     <label className="form-control w-full max-w-xs">
@@ -19,6 +20,7 @@ export default function Input({
         value={value}
         placeholder={placeholder}
         onChange={onChange}
+        disabled={disabled ? disabled : false}
         className="input input-bordered w-full max-w-xs bg-gray-100"
       />
       {error ? (

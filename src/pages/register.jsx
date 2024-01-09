@@ -2,11 +2,12 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import Input from "@/components/common/functions/Input";
-import LoadingButton from "@/components/common/functions/LoadingButton";
+import Input from "@/components/functions/Input";
+import LoadingButton from "@/components/functions/LoadingButton";
 import userApi from "@/api/modules/users.api";
 import { setUser } from "@/redux/features/userSlice";
 import { useRouter } from "next/router";
+import { toast } from "react-toastify";
 
 export default function Register() {
   const dispatch = useDispatch();
@@ -37,13 +38,12 @@ export default function Register() {
       setIsLoginRequest(true);
       const { response, error } = await userApi.signUp(values);
       setIsLoginRequest(false);
-
       if (response) {
         signUpForm.resetForm();
         dispatch(setUser(response));
+        toast.success("Register success");
         router.push("/");
       }
-
       if (error) setErrorMessage(error.message);
     },
   });

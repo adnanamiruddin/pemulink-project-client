@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import userApi from "@/api/modules/users.api";
-import Navbar from "@/components/common/layouts/Navbar";
+import Navbar from "@/components/layouts/Navbar";
 import { setUser } from "@/redux/features/userSlice";
 
 export default function MainLayout({ children }) {
@@ -19,7 +19,7 @@ export default function MainLayout({ children }) {
   return (
     <div className={`min-h-screen bg-white`}>
       <Navbar />
-      <div className="container mx-auto py-6 text-black">{children}</div>
+      <div className="container px-4 py-6 text-black">{children}</div>
     </div>
   );
 }
