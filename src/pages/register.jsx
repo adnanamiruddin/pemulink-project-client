@@ -6,9 +6,11 @@ import Input from "@/components/common/functions/Input";
 import LoadingButton from "@/components/common/functions/LoadingButton";
 import userApi from "@/api/modules/users.api";
 import { setUser } from "@/redux/features/userSlice";
+import { useRouter } from "next/router";
 
 export default function Register() {
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const [isLoginRequest, setIsLoginRequest] = useState(false);
   const [errorMessage, setErrorMessage] = useState(undefined);
@@ -38,7 +40,8 @@ export default function Register() {
 
       if (response) {
         signUpForm.resetForm();
-        dispatch(setUser(response.data));
+        dispatch(setUser(response));
+        router.push("/");
       }
 
       if (error) setErrorMessage(error.message);
