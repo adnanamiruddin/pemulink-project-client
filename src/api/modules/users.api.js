@@ -9,12 +9,13 @@ const usersEndpoint = {
 };
 
 const userApi = {
-  signUp: async ({ email, fullName, password }) => {
+  signUp: async ({ email, fullName, password, confirmPassword }) => {
     try {
       const response = await publicClient.post(usersEndpoint.signUp, {
         email,
         fullName,
         password,
+        confirmPassword,
       });
       return { response };
     } catch (error) {

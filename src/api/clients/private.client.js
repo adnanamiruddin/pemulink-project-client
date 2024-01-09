@@ -1,7 +1,7 @@
 import axios from "axios";
 import queryString from "query-string";
 
-const baseURL = import.meta.env.VITE_REACT_APP_BASEURL;
+const baseURL = process.env.NEXT_PUBLIC_SERVER_URL;
 
 const privateClient = axios.create({
   baseURL,
