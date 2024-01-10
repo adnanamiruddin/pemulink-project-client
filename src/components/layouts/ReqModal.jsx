@@ -12,20 +12,7 @@ export default function ReqModal({ mission }) {
   const [imageUpload, setImageUpload] = useState(null);
 
   const handleChangeUploadImage = (e) => {
-    const selectedFile = e.target.files[0];
-    if (!selectedFile) {
-      toast.error("Pilih file terlebih dahulu.");
-      return;
-    }
-    const fileExtension = selectedFile.name.split(".").pop().toLowerCase();
-    const allowedExtensions = ["jpg", "jpeg", "png"];
-    if (!allowedExtensions.includes(fileExtension)) {
-      toast.error(
-        "Format file tidak didukung. Pilih file gambar (jpg, jpeg, png)."
-      );
-      return;
-    }
-    setImageUpload(selectedFile);
+    setImageUpload(e.target.files[0]);
   };
 
   const uploadImageToFirebase = async () => {
@@ -68,7 +55,11 @@ export default function ReqModal({ mission }) {
         <div className="modal-box bg-gray-50">
           <h3 className="font-bold text-lg">{mission.title}</h3>
           <p className="py-4 flex flex-col gap-4">
-            <input type="file" onChange={handleChangeUploadImage} />
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleChangeUploadImage}
+            />
 
             <button className="btn btn-primary" onClick={uploadImageToFirebase}>
               Upload
