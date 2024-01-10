@@ -6,12 +6,13 @@ const missionAcceptanceReqsEndpoint = {
 };
 
 const missionAcceptanceReqsApi = {
-  createMissionAcceptanceReq: async ({ missionId }) => {
+  createMissionAcceptanceReq: async ({ missionId, photoEvidenceURL }) => {
     try {
       const response = await privateClient.post(
         missionAcceptanceReqsEndpoint.missionAcceptanceReqs,
         {
           missionId,
+          photoEvidenceURL,
         }
       );
       return { response };
