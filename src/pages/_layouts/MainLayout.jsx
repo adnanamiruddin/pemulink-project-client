@@ -21,7 +21,7 @@ export default function MainLayout({ children }) {
   return (
     <div className={`min-h-screen bg-white`}>
       <ToastContainer
-        position="bottom-left"
+        position="top-center"
         autoClose={4000}
         theme="light"
         hideProgressBar={false}

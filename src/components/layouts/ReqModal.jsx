@@ -12,11 +12,27 @@ export default function ReqModal({ mission }) {
   const [imageUpload, setImageUpload] = useState(null);
 
   const handleChangeUploadImage = (e) => {
-    setImageUpload(e.target.files[0]);
+    const selectedFile = e.target.files[0];
+    if (!selectedFile) {
+      toast.error("Pilih file terlebih dahulu.");
+      return;
+    }
+    const fileExtension = selectedFile.name.split(".").pop().toLowerCase();
+    const allowedExtensions = ["jpg", "jpeg", "png"];
+    if (!allowedExtensions.includes(fileExtension)) {
+      toast.error(
+        "Format file tidak didukung. Pilih file gambar (jpg, jpeg, png)."
+      );
+      return;
+    }
+    setImageUpload(selectedFile);
   };
 
   const uploadImageToFirebase = async () => {
-    if (!imageUpload) return;
+    if (!imageUpload) {
+      toast.error("Harap upload foto");
+      return;
+    }
 
     const storageRef = ref(
       storage,
@@ -27,11 +43,11 @@ export default function ReqModal({ mission }) {
 
     const { response, error } =
       await missionAcceptanceReqsApi.createMissionAcceptanceReq({
-        missionId: mission.id,
+        id: mission.id,
         photoEvidenceURL: downloadUrl,
       });
     if (response) router.push("/dashboard");
-    if (error) console.log(error);;
+    if (error) toast.error(error);
   };
 
   return (
