@@ -39,7 +39,7 @@ export default function Navbar() {
               className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
             >
               <li>
-                <Link href="/profile">Profile</Link>
+                <Link href="/dashboard/profile">Profile</Link>
               </li>
               <li>
                 <Link href="/">Settings</Link>
