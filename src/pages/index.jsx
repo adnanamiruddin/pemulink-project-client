@@ -1,20 +1,21 @@
-import { useState, useEffect } from "react";
+import HomeCarousel from "@/components/layouts/HomeCarousel";
+import { setGlobalLoading } from "@/redux/features/globalLoadingSlice";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 
 export default function Home() {
-  const [showWelcome, setShowWelcome] = useState(true);
+  const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   const timer = setTimeout(() => {
-  //     setShowWelcome(false);
-  //   }, 3000);
-
-  //   return () => clearTimeout(timer);
-  // }, []);
+  useEffect(() => {
+    dispatch(setGlobalLoading(true));
+    setTimeout(() => {
+      dispatch(setGlobalLoading(false));
+    }, 1000);
+  }, [dispatch]);
 
   return (
-    <div>Hello World</div>
-    // <div className="min-h-screen bg-[#4338CA]">
-    //   {showWelcome ? <div className="">Selamat Datang</div> : <div>Hello World</div>}
-    // </div>
+    <div className="flex flex-col">
+      <HomeCarousel />
+    </div>
   );
 }

@@ -26,7 +26,7 @@ export default function Navbar() {
   };
 
   return (
-    <div className="navbar bg-base-100">
+    <div className="navbar bg-gray-200 px-4">
       <div className="flex-1">
         <Link href="/" className="btn btn-ghost flex justify-start">
           <Image
@@ -38,8 +38,13 @@ export default function Navbar() {
           />
         </Link>
       </div>
+
       <div className="flex-none gap-2">
-        {user ? (
+        <span className="material-symbols-outlined text-black text-4xl">
+          more_vert
+        </span>
+
+        {/* {user ? (
           <div className="dropdown dropdown-end">
             <div tabIndex={0} role="button" className="btn btn-ghost">
               <h3 className="text-white text-xl">{user.fullName}</h3>
@@ -63,7 +68,7 @@ export default function Navbar() {
           <Link href="/login" className="btn btn-ghost">
             Login
           </Link>
-        )}
+        )} */}
       </div>
     </div>
   );

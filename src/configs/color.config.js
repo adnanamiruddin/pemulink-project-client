@@ -1,6 +1,5 @@
 const colorsConfig = {
-  purple: "#4338CA",
-  darkPurple: "#3730A3",
+  lightBlue: "#7BC9EB",
 };
 
 export default colorsConfig;

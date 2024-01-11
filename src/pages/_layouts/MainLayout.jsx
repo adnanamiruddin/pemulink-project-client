@@ -4,7 +4,11 @@ import userApi from "@/api/modules/users.api";
 import Navbar from "@/components/layouts/Navbar";
 import { setUser } from "@/redux/features/userSlice";
 import { ToastContainer } from "react-toastify";
+import GlobalLoading from "@/components/layouts/GlobalLoading";
+
 import "react-toastify/dist/ReactToastify.css";
+import "swiper/css";
+import "swiper/css/pagination";
 
 export default function MainLayout({ children }) {
   const dispatch = useDispatch();
@@ -19,7 +23,12 @@ export default function MainLayout({ children }) {
   }, [dispatch]);
 
   return (
-    <div className={`min-h-screen bg-white`}>
+    <div className={`min-h-screen`}>
+      {/* Global Loading START */}
+      <GlobalLoading />
+      {/* Global Loading END */}
+
+      {/* Config React Toastify START */}
       <ToastContainer
         position="top-center"
         autoClose={4000}
@@ -30,8 +39,10 @@ export default function MainLayout({ children }) {
         pauseOnFocusLoss
         pauseOnHover
       />
+      {/* Config React Toastify END */}
+
       <Navbar />
-      <div className="container px-4 py-6 text-black">{children}</div>
+      <div className="p-6 text-black bg-sky-50 min-h-screen">{children}</div>
     </div>
   );
 }
