@@ -8,6 +8,8 @@ import userApi from "@/api/modules/users.api";
 import { setUser } from "@/redux/features/userSlice";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
+import { auth } from "@/api/config/firebase.config";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -29,15 +31,27 @@ export default function Login() {
     }),
     onSubmit: async (values) => {
       setIsLoginRequest(true);
-      const { response, error } = await userApi.signIn(values);
-      setIsLoginRequest(false);
-      if (response) {
-        signInForm.resetForm();
-        dispatch(setUser(response));
-        toast.success("Login success");
-        router.push("/");
+      try {
+        const userCredential = await signInWithEmailAndPassword(
+          auth,
+          values.email,
+          values.password
+        );
+        const { response, error } = await userApi.signIn({
+          userUID: userCredential.user.uid,
+        });
+        if (response) {
+          signInForm.resetForm();
+          dispatch(setUser(response));
+          toast.success("Login success");
+          router.push("/");
+        }
+        if (error) setErrorMessage(error.message);
+      } catch (error) {
+        setErrorMessage(error.message);
+      } finally {
+        setIsLoginRequest(false);
       }
-      if (error) setErrorMessage(error.message);
     },
   });
 

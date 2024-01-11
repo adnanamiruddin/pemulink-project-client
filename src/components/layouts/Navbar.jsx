@@ -4,15 +4,25 @@ import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUser, setUser } from "@/redux/features/userSlice";
 import { toast } from "react-toastify";
+import { useRouter } from "next/router";
+import { auth } from "@/api/config/firebase.config";
 
 export default function Navbar() {
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const { user } = useSelector(selectUser);
 
-  const handleLogout = () => {
-    dispatch(setUser(null));
-    toast.success("Bye bye");
+  const handleLogout = async () => {
+    console.log("logout");
+    try {
+      await auth.signOut();
+      dispatch(setUser(null));
+      toast.success("Logout success");
+      router.push("/");
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
 
   return (
