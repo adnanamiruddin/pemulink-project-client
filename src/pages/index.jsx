@@ -27,13 +27,13 @@ export default function Home() {
       <div className="flex justify-center items-center gap-3 mt-8 mb-4">
         <Link
           href="/register"
-          className="text-center w-32 py-3 px-2 bg-blue-500 text-white rounded-lg border-2 border-blue-500"
+          className="text-center font-medium w-32 py-3 px-2 bg-blue-500 text-white rounded-lg border-2 border-blue-500"
         >
           Daftar Gratis
         </Link>
         <Link
           href="/login"
-          className="text-center w-32 py-3 px-2 bg-white text-blue-500 rounded-lg border-2 border-blue-500"
+          className="text-center font-medium w-32 py-3 px-2 bg-white text-blue-500 rounded-lg border-2 border-blue-500"
         >
           Masuk
         </Link>
@@ -47,7 +47,7 @@ export default function Home() {
 
       <Link
         href="/register"
-        className="btn bg-blue-500 w-full text-white text-lg flex justify-between items-center border-0 hover:bg-blue-700"
+        className="btn bg-blue-500 w-full text-white text-lg flex justify-between items-center border-0 hover:bg-blue-700 mb-6"
       >
         <p>Daftar Gratis</p> <GoArrowUpRight />
       </Link>

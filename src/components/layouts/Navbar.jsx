@@ -27,16 +27,10 @@ export default function Navbar() {
   };
 
   return (
-    <div className="navbar bg-gray-200 px-4 fixed">
+    <div className="navbar bg-white px-4 fixed">
       <div className="flex-1">
-        <Link href="/" className="btn btn-ghost flex justify-start">
-          <Image
-            src={pemulinkLogo}
-            alt="Pemulink Logo"
-            width={120}
-            height={40}
-            priority
-          />
+        <Link href="/">
+          <Image src={pemulinkLogo} alt="Pemulink Logo" width={150} priority />
         </Link>
       </div>
 
