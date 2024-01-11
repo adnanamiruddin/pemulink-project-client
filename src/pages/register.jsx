@@ -77,7 +77,7 @@ export default function Register() {
 
   return (
     <div className="min-h-screen flex justify-center items-center px-1">
-      <div className="bg-white py-4 px-5 rounded-lg w-full">
+      <div className="bg-white pt-4 pb-7 px-5 rounded-lg w-full">
         <h3 className="text-2xl font-semibold mb-1">Buat Akun</h3>
         <h5 className="mb-5">
           Sudah punya akun?{" "}

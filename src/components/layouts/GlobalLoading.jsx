@@ -15,13 +15,13 @@ export default function GlobalLoading() {
       setIsLoading(true);
       document.body.style.overflow = "hidden";
     } else {
+      document.body.style.overflow = "auto";
       const timer = setTimeout(() => {
         setIsLoading(false);
-        document.body.style.overflow = "auto";
 
         setTimeout(() => {
           setIsHidden(true);
-        }, 1000);
+        }, 1100);
       }, 1000);
 
       return () => {

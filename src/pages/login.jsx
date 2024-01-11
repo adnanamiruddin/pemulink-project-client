@@ -66,7 +66,7 @@ export default function Login() {
 
   return (
     <div className="min-h-screen flex justify-center items-center px-1">
-      <div className="bg-white py-4 px-5 rounded-lg w-full">
+      <div className="bg-white pt-4 pb-7 px-5 rounded-lg w-full">
         <h3 className="text-2xl font-semibold mb-1">Masuk</h3>
         <h5 className="mb-5">
           Baru di Pemulink?{" "}
@@ -85,7 +85,6 @@ export default function Login() {
             </div>
           ))}
         </div>
-
 
         <div className="flex justify-center items-center gap-2 my-5">
           <div className="h-[1px] w-full bg-gray-300 mx-2"></div>
