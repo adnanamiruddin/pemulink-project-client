@@ -7,6 +7,7 @@ import { ToastContainer } from "react-toastify";
 import GlobalLoading from "@/components/layouts/GlobalLoading";
 
 import "react-toastify/dist/ReactToastify.css";
+import Footer from "@/components/layouts/Footer";
 
 export default function MainLayout({ children }) {
   const dispatch = useDispatch();
@@ -40,7 +41,8 @@ export default function MainLayout({ children }) {
       {/* Config React Toastify END */}
 
       <Navbar />
-      <div className="p-6 text-black bg-blue-50 min-h-screen">{children}</div>
+      <div className="p-6 pt-20 text-black bg-blue-50 min-h-screen">{children}</div>
+      <Footer />
     </>
   );
 }

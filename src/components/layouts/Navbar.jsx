@@ -6,6 +6,7 @@ import { selectUser, setUser } from "@/redux/features/userSlice";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 import { auth } from "@/api/config/firebase.config";
+import { IoEllipsisVertical } from "react-icons/io5";
 
 export default function Navbar() {
   const dispatch = useDispatch();
@@ -26,7 +27,7 @@ export default function Navbar() {
   };
 
   return (
-    <div className="navbar bg-gray-200 px-4">
+    <div className="navbar bg-gray-200 px-4 fixed">
       <div className="flex-1">
         <Link href="/" className="btn btn-ghost flex justify-start">
           <Image
@@ -40,9 +41,7 @@ export default function Navbar() {
       </div>
 
       <div className="flex-none gap-2">
-        <span className="material-symbols-outlined text-black text-4xl">
-          more_vert
-        </span>
+        <IoEllipsisVertical className="text-black text-2xl" />
 
         {/* {user ? (
           <div className="dropdown dropdown-end">
