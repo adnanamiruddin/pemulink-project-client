@@ -8,22 +8,33 @@ export default function GlobalLoading() {
   const { globalLoading } = useSelector(selectGlobalLoading);
 
   const [isLoading, setIsLoading] = useState(false);
+  const [isHidden, setIsHidden] = useState(false);
 
   useEffect(() => {
     if (globalLoading) {
       setIsLoading(true);
+      document.body.style.overflow = "hidden";
     } else {
-      setTimeout(() => {
+      const timer = setTimeout(() => {
         setIsLoading(false);
+        document.body.style.overflow = "auto";
+
+        setTimeout(() => {
+          setIsHidden(true);
+        }, 1000);
       }, 1000);
+
+      return () => {
+        clearTimeout(timer);
+      };
     }
   }, [globalLoading]);
 
   return (
     <div
-      className={`min-h-screen absolute flex justify-center items-center bg-sky-50 z-[999] transition-all duration-300 ease-in-out ${
+      className={`min-h-screen absolute flex justify-center items-center bg-blue-50 z-[999] transition-all duration-300 ease-in-out ${
         isLoading ? "opacity-100" : "opacity-0"
-      }`}
+      } ${isHidden ? "hidden" : ""}`}
     >
       <Image src={pemulinkLogo} alt="Pemulink Logo" className="w-1/2" />
     </div>
