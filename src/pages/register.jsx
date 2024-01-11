@@ -4,10 +4,12 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import Input from "@/components/functions/Input";
 import LoadingButton from "@/components/functions/LoadingButton";
-import userApi from "@/api/modules/users.api";
 import { setUser } from "@/redux/features/userSlice";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "@/api/config/firebase.config";
+import userApi from "@/api/modules/users.api";
 
 export default function Register() {
   const dispatch = useDispatch();
@@ -36,15 +38,28 @@ export default function Register() {
     }),
     onSubmit: async (values) => {
       setIsLoginRequest(true);
-      const { response, error } = await userApi.signUp(values);
-      setIsLoginRequest(false);
-      if (response) {
-        signUpForm.resetForm();
-        dispatch(setUser(response));
-        toast.success("Register success");
-        router.push("/");
+      try {
+        const userCredential = await createUserWithEmailAndPassword(
+          auth,
+          values.email,
+          values.password
+        );
+        const { response, error } = await userApi.signUp({
+          userUID: userCredential.user.uid,
+          fullName: values.fullName,
+        });
+        if (response) {
+          signUpForm.resetForm();
+          dispatch(setUser(response));
+          toast.success("Register success");
+          router.push("/");
+        }
+        if (error) setErrorMessage(error.message);
+      } catch (error) {
+        setErrorMessage(error.message);
+      } finally {
+        setIsLoginRequest(false);
       }
-      if (error) setErrorMessage(error.message);
     },
   });
 
