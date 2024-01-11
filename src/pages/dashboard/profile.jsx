@@ -8,6 +8,7 @@ import userApi from "@/api/modules/users.api";
 import { setUser } from "@/redux/features/userSlice";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
+import { getAuth } from "firebase/auth";
 
 export default function Profile() {
   const dispatch = useDispatch();
@@ -53,6 +54,11 @@ export default function Profile() {
       const { response, error } = await userApi.getProfile();
       if (response) profileForm.setValues(response);
       if (error) setErrorMessage(error.message);
+
+      const auth = getAuth();
+      if (auth.currentUser) {
+        profileForm.setFieldValue("email", auth.currentUser.email);
+      }
     };
     fetchUserProfile();
   }, []);
