@@ -36,16 +36,16 @@ export default function Register() {
       confirmPassword: "",
     },
     validationSchema: Yup.object({
-      email: Yup.string().email().required("Email is required"),
-      firstName: Yup.string().required("First name is required"),
-      lastName: Yup.string().required("Last name is required"),
+      email: Yup.string().email().required("Email harus diisi"),
+      firstName: Yup.string().required("Nama depan harus diisi"),
+      lastName: Yup.string().required("Nama belakang harus diisi"),
       password: Yup.string()
-        .min(8, "Minimum 8 characters for password")
-        .required("Password is required"),
+        .min(8, "Setidaknya 8 karakter untuk password")
+        .required("Password harus diisi"),
       confirmPassword: Yup.string()
-        .oneOf([Yup.ref("password")], "Password does not match")
-        .min(8, "Minimum 8 characters for password")
-        .required("Confirm password is required"),
+        .oneOf([Yup.ref("password")], "Password tidak cocok")
+        .min(8, "Setidaknya 8 karakter untuk password")
+        .required("Konfirmasi password harus diisi"),
     }),
     onSubmit: async (values) => {
       setIsLoginRequest(true);
@@ -64,7 +64,7 @@ export default function Register() {
           signUpForm.resetForm();
           dispatch(setUser(response));
           toast.success("Register success");
-          router.push("/");
+          router.push("/dashboard");
         }
         if (error) setErrorMessage(error.message);
       } catch (error) {

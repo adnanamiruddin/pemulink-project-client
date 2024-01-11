@@ -25,9 +25,6 @@ export default function MissionDetail() {
     <div className="flex flex-col gap-4">
       <h1>{mission.title}</h1>
       <p>{mission.description}</p>
-      <Link href={`/mission/${id}/acceptance-req`} className="btn btn-primary">
-        Permintaan Penerimaan Misi
-      </Link>
 
       <ReqModal mission={mission} />
     </div>

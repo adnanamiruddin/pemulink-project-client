@@ -33,10 +33,10 @@ export default function Login() {
       password: "",
     },
     validationSchema: Yup.object({
-      email: Yup.string().email().required("Email is required"),
+      email: Yup.string().email().required("Email harus diisi"),
       password: Yup.string()
-        .min(8, "Minimum 8 characters for password")
-        .required("Password is required"),
+        .min(8, "Setidaknya 8 karakter untuk password")
+        .required("Password harus diisi"),
     }),
     onSubmit: async (values) => {
       setIsLoginRequest(true);
@@ -53,7 +53,7 @@ export default function Login() {
           signInForm.resetForm();
           dispatch(setUser(response));
           toast.success("Login success");
-          router.push("/");
+          router.push("/dashboard");
         }
         if (error) setErrorMessage(error.message);
       } catch (error) {
