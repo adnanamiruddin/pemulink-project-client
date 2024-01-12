@@ -36,7 +36,7 @@ const Loading = () => {
   });
 
   return loading ? (
-    <div className="min-h-screen absolute z-[999] w-full flex justify-center items-center bg-blue-50 loading-container gap-3">
+    <div className="min-h-screen fixed z-[999] w-full flex justify-center items-center bg-blue-50 loading-container gap-3">
       <span className="loading loading-ball loading-lg text-blue-500"></span>
       <Image src={pemulinkLogo} alt="Pemulink Logo" className="w-1/2" />
       <span className="loading loading-ball loading-lg text-yellow-400"></span>

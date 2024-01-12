@@ -26,7 +26,7 @@ export default function Navbar() {
   };
 
   return (
-    <div className="navbar bg-white px-4 fixed">
+    <div className="navbar bg-white px-4 fixed z-50">
       <div className="flex-1">
         <Link href="/">
           <Image src={pemulinkLogo} alt="Pemulink Logo" width={150} priority />

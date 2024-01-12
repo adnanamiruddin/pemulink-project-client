@@ -9,7 +9,7 @@ const ProtectedPage = ({ children }) => {
   const { user } = useSelector(selectUser);
 
   useEffect(() => {
-    if (!user) router.push("/");
+    if (!user) router.push("/login");
   }, [user, router]);
 
   return user ? children : null;

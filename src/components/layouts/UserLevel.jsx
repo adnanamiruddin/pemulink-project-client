@@ -8,7 +8,7 @@ export default function UserLevel({ user, level, setLevel }) {
   const [remainingXPToNextLevel, setRemainingXPToNextLevel] = useState(4000);
 
   useEffect(() => {
-    const userXP = user.xp;
+    const userXP = user?.xp;
 
     // Calculates level based on XP
     const calculatedLevel = Math.floor(userXP / 4000) + 1;
@@ -50,13 +50,13 @@ export default function UserLevel({ user, level, setLevel }) {
             width: `${(currentXP / nextLevelXP) * 100}%`,
           }}
         ></div>
-        <div className="rounded-full border-2 border-yellow-600 w-7 h-7 text-center relative z-10 font-semibold">
+        <div className="rounded-full border-2 border-yellow-600 w-7 h-7 text-center relative font-semibold">
           {level}
         </div>
         <p className="absolute top-0 left-0 h-full w-full flex items-center justify-center text-stone-700 font-semibold">
           {currentXP} / {nextLevelXP}
         </p>
-        <div className="rounded-full border-2 border-yellow-600 w-7 h-7 text-center relative z-10 font-semibold">
+        <div className="rounded-full border-2 border-yellow-600 w-7 h-7 text-center relative font-semibold">
           {level + 1}
         </div>
       </div>

@@ -1,11 +1,11 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Input from "@/components/functions/Input";
 import LoadingButton from "@/components/functions/LoadingButton";
 import userApi from "@/api/modules/users.api";
-import { setUser } from "@/redux/features/userSlice";
+import { selectUser, setUser } from "@/redux/features/userSlice";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
 import { auth } from "@/api/config/firebase.config";
@@ -22,10 +22,16 @@ export default function Login() {
   const dispatch = useDispatch();
   const router = useRouter();
 
+  const { user } = useSelector(selectUser);
+
   const [isLoginRequest, setIsLoginRequest] = useState(false);
   const [errorMessage, setErrorMessage] = useState(undefined);
 
   const icons = [googleIcon, microsoftIcon, facebookIcon, tiktokIcon];
+
+  useEffect(() => {
+    if (user) router.push("/dashboard");
+  });
 
   const signInForm = useFormik({
     initialValues: {
