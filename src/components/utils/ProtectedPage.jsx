@@ -1,12 +1,16 @@
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
+import { selectUser } from "@/redux/features/userSlice";
+import { useRouter } from "next/router";
 
 const ProtectedPage = ({ children }) => {
-  const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.user);
+  const router = useRouter();
+
+  const { user } = useSelector(selectUser);
 
   useEffect(() => {
-  }, [user, dispatch]);
+    if (!user) router.push("/");
+  }, [user, router]);
 
   return user ? children : null;
 };

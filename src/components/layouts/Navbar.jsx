@@ -15,7 +15,6 @@ export default function Navbar() {
   const { user } = useSelector(selectUser);
 
   const handleLogout = async () => {
-    console.log("logout");
     try {
       await auth.signOut();
       dispatch(setUser(null));
@@ -36,6 +35,7 @@ export default function Navbar() {
 
       <div className="flex-none gap-2">
         <IoEllipsisVertical className="text-black text-2xl" />
+        <button onClick={handleLogout}>Logout</button>
 
         {/* {user ? (
           <div className="dropdown dropdown-end">
