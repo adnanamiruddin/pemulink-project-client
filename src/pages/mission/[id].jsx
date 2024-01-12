@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import missionPointIcon from "../../../public/mission-point-icon.svg";
+import { MdKeyboardArrowLeft } from "react-icons/md";
 
 export default function MissionDetail() {
   const dispatch = useDispatch();
@@ -28,36 +29,45 @@ export default function MissionDetail() {
   }, [id, dispatch]);
 
   return mission ? (
-    <div className="flex flex-col gap-5">
-      <h2 className="text-center font-bold text-2xl mt-4">{mission.title}</h2>
+    <>
+      <Link
+        href="/dashboard"
+        className="btn btn-sm bg-blue-500 border-0 text-white"
+      >
+        <MdKeyboardArrowLeft /> Kembali
+      </Link>
 
-      <div className="flex flex-col gap-5 bg-white p-6 rounded-xl">
-        <div className="w-full">
-          <Image
-            src={mission.imageURL}
-            alt={mission.title}
-            layout="responsive"
-            width={100}
-            height={100}
-          />
+      <div className="flex flex-col gap-5">
+        <h2 className="text-center font-bold text-2xl mt-4">{mission.title}</h2>
+
+        <div className="flex flex-col gap-5 bg-white p-6 rounded-xl">
+          <div className="w-full">
+            <Image
+              src={mission.imageURL}
+              alt={mission.title}
+              layout="responsive"
+              width={100}
+              height={100}
+            />
+          </div>
+
+          <p className="text-justify text-sm mt-6">{mission.description}</p>
+
+          <div className="flex gap-3 items-center">
+            <h6 className="text-blue-500 text-sm font-medium flex items-center gap-1">
+              <Image src={missionPointIcon} alt="Mission Point Icon" />
+              {mission.pointReward} / Kg
+            </h6>
+            <div className="w-px h-5 bg-gray-500"></div>
+            <h6 className="text-cyan-400 text-sm font-medium">
+              {mission.xpReward} Exp
+            </h6>
+          </div>
         </div>
 
-        <p className="text-justify text-sm mt-6">{mission.description}</p>
-
-        <div className="flex gap-3 items-center">
-          <h6 className="text-blue-500 text-sm font-medium flex items-center gap-1">
-            <Image src={missionPointIcon} alt="Mission Point Icon" />
-            {mission.pointReward} / Kg
-          </h6>
-          <div className="w-px h-5 bg-gray-500"></div>
-          <h6 className="text-cyan-400 text-sm font-medium">
-            {mission.xpReward} Exp
-          </h6>
-        </div>
+        <ReqModal mission={mission} />
       </div>
-
-      <ReqModal mission={mission} />
-    </div>
+    </>
   ) : (
     <div>404</div>
   );
