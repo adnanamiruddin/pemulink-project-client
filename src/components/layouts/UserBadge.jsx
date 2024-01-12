@@ -30,7 +30,6 @@ export default function UserBadge({ user, level }) {
           <h4 className="font-medium">Total Poin</h4>
           <h3 className="text-4xl font-semibold mt-1">{user.point}</h3>
         </div>
-
         <button className="font-medium p-2 rounded-xl bg-white text-blue-500 text-lg flex justify-between items-center gap-2 border-0 hover:bg-gray-200">
           <GoArrowUpRight /> <p>Tukar Poin</p>
         </button>
