@@ -23,7 +23,7 @@ export default function MissionDetail() {
       const { response, error } = await missionsApi.getMissionById({ id });
       dispatch(setGlobalLoading(false));
       if (response) setMission(response);
-      if (error) toast.error(error);
+      if (error) toast.error(error.message);
     };
     fetchMissions();
   }, [id, dispatch]);

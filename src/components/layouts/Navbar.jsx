@@ -18,7 +18,7 @@ export default function Navbar() {
     try {
       await auth.signOut();
       dispatch(setUser(null));
-      toast.success("Logout success");
+      toast.info("Bye bye 👋");
       router.push("/");
     } catch (error) {
       toast.error(error.message);

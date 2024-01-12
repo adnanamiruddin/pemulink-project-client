@@ -16,7 +16,6 @@ export default function Dashboard() {
   const dispatch = useDispatch();
 
   const { user } = useSelector(selectUser);
-  console.log(user);
 
   const [missions, setMissions] = useState([]);
   const [level, setLevel] = useState(1);

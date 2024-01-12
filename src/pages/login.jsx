@@ -71,7 +71,7 @@ export default function Login() {
   });
 
   return (
-    <div className="min-h-screen flex justify-center items-center px-1">
+    <div className="min-h-[90vh] flex justify-center items-center px-1">
       <div className="bg-white pt-4 pb-7 px-5 rounded-lg w-full">
         <h3 className="text-2xl font-semibold mb-1">Masuk</h3>
         <h5 className="mb-5">

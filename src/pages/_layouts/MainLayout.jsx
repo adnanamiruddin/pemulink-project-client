@@ -37,11 +37,14 @@ export default function MainLayout({ children }) {
         closeOnClick
         pauseOnFocusLoss
         pauseOnHover
+        limit={1}
       />
       {/* Config React Toastify END */}
 
       <Navbar />
-      <div className="p-6 pt-20 text-black bg-blue-50 min-h-screen">{children}</div>
+      <div className="p-6 pt-20 text-black bg-blue-50 min-h-screen">
+        {children}
+      </div>
       <Footer />
     </>
   );
