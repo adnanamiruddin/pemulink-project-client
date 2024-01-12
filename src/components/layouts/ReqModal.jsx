@@ -23,7 +23,7 @@ export default function ReqModal({ mission }) {
 
     const storageRef = ref(
       storage,
-      `MissionAcceptanceReq/${imageUpload.name + v4()}`
+      `MissionAcceptanceReqs/${imageUpload.name + v4()}`
     );
     const upload = await uploadBytes(storageRef, imageUpload);
     const downloadUrl = await getDownloadURL(upload.ref);

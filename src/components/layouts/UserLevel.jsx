@@ -2,39 +2,36 @@ import Image from "next/image";
 import level1Icon from "../../../public/level-1-icon.svg";
 import { useEffect, useState } from "react";
 
-export default function UserLevel({ user }) {
-  const [level, setLevel] = useState(1);
+export default function UserLevel({ user, level, setLevel }) {
   const [currentXP, setCurrentXP] = useState(0);
   const [nextLevelXP, setNextLevelXP] = useState(4000);
   const [remainingXPToNextLevel, setRemainingXPToNextLevel] = useState(4000);
 
   useEffect(() => {
-    if (user) {
-      const userXP = user.xp;
+    const userXP = user.xp;
 
-      // Calculates level based on XP
-      const calculatedLevel = Math.floor(userXP / 4000) + 1;
-      setLevel(calculatedLevel);
+    // Calculates level based on XP
+    const calculatedLevel = Math.floor(userXP / 4000) + 1;
+    setLevel(calculatedLevel);
 
-      // Sets XP to 0 when reaching a certain level
-      const maxLevelXP = calculatedLevel * 4000;
-      const remainingXP = userXP - maxLevelXP;
+    // Sets XP to 0 when reaching a certain level
+    const maxLevelXP = calculatedLevel * 4000;
+    const remainingXP = userXP - maxLevelXP;
 
-      if (remainingXP >= 0) {
-        setLevel(calculatedLevel + 1);
-        setCurrentXP(remainingXP);
-        setNextLevelXP((calculatedLevel + 1) * 4000);
-        setRemainingXPToNextLevel((calculatedLevel + 1) * 4000 - userXP);
-      } else {
-        setCurrentXP(userXP);
-        setNextLevelXP(calculatedLevel * 4000);
-        setRemainingXPToNextLevel(calculatedLevel * 4000 - userXP);
-      }
+    if (remainingXP >= 0) {
+      setLevel(calculatedLevel + 1);
+      setCurrentXP(remainingXP);
+      setNextLevelXP((calculatedLevel + 1) * 4000);
+      setRemainingXPToNextLevel((calculatedLevel + 1) * 4000 - userXP);
+    } else {
+      setCurrentXP(userXP);
+      setNextLevelXP(calculatedLevel * 4000);
+      setRemainingXPToNextLevel(calculatedLevel * 4000 - userXP);
     }
   }, [user]);
 
   return (
-    <div className="bg-white p-4">
+    <div className="bg-white p-4 rounded-lg">
       <div className="flex items-center gap-4">
         <Image src={level1Icon} alt={`level ${level} icon`} />
         <div className="">
