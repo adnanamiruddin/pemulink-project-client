@@ -5,6 +5,7 @@ import { v4 } from "uuid";
 import missionAcceptanceReqsApi from "@/api/modules/missionAcceptanceReqs.api";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
+import { IoClose } from "react-icons/io5";
 
 export default function ReqModal({ mission }) {
   const router = useRouter();
@@ -40,7 +41,7 @@ export default function ReqModal({ mission }) {
   return (
     <div>
       <button
-        className="btn"
+        className="btn w-full bg-blue-500 text-white border-0"
         onClick={() =>
           document.getElementById("acceptance_req_modal").showModal()
         }
@@ -53,24 +54,29 @@ export default function ReqModal({ mission }) {
         className="modal modal-bottom sm:modal-middle"
       >
         <div className="modal-box bg-gray-50">
-          <h3 className="font-bold text-lg">{mission.title}</h3>
-          <p className="py-4 flex flex-col gap-4">
+          <div className="flex justify-between">
+            <h3 className="font-bold text-xl">Upload Bukti Foto</h3>
+            <form method="dialog">
+              <button>
+                <IoClose className="text-3xl hover:text-gray-600" />
+              </button>
+            </form>
+          </div>
+
+          <p className="py-4 flex flex-col gap-6 mt-2">
             <input
               type="file"
               accept="image/*"
               onChange={handleChangeUploadImage}
             />
 
-            <button className="btn btn-primary" onClick={uploadImageToFirebase}>
+            <button
+              className="btn bg-blue-500 text-white border-0 text-lg"
+              onClick={uploadImageToFirebase}
+            >
               Upload
             </button>
           </p>
-
-          <div className="modal-action">
-            <form method="dialog">
-              <button className="btn">Close</button>
-            </form>
-          </div>
         </div>
 
         <form method="dialog" className="modal-backdrop">

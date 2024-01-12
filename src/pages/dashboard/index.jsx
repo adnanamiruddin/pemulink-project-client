@@ -18,7 +18,6 @@ export default function Dashboard() {
 
   const [missions, setMissions] = useState([]);
   const [level, setLevel] = useState(1);
-  console.log(missions);
 
   useEffect(() => {
     const fetchMissions = async () => {
@@ -29,7 +28,7 @@ export default function Dashboard() {
       if (error) toast.error(error.message);
     };
     fetchMissions();
-  }, []);
+  }, [dispatch]);
 
   return user ? (
     <div className="flex flex-col gap-6">
@@ -46,47 +45,41 @@ export default function Dashboard() {
       {missions.map((mission, i) => (
         <div key={i} className="bg-white p-4 rounded-xl">
           <div className="flex justify-between">
-            <div className="flex w-4/6 gap-1">
+            <div className="w-1/2">
               <Image
                 src={mission.imageURL}
                 alt={mission.title}
                 layout="responsive"
                 width={100}
                 height={100}
-                className="w-1/4"
               />
-              <div className="flex flex-col gap-1">
-                <h4 className="font-medium text-sm">{mission.title}</h4>
-                <h6 className="text-gray-400 text-xs">{mission.description}</h6>
-
-                <h6 className="text-blue-500 text-xs flex items-center gap-1 mt-2">
-                  <Image src={missionPointIcon} alt="Mission Point Icon" />
-                  {mission.pointReward} / Kg
-                </h6>
-                <h6 className="text-cyan-400 text-xs">
-                  {mission.xpReward} Exp
-                </h6>
-              </div>
             </div>
 
-            <div></div>
+            <div>
+              <h4 className="font-medium text-sm">{mission.title}</h4>
+              <h6 className="text-gray-400 text-xs mt-1">
+                {mission.description.substring(0, 75)}...
+              </h6>
+
+              <h6 className="text-blue-500 text-xs flex items-center gap-1 mt-3">
+                <Image src={missionPointIcon} alt="Mission Point Icon" />
+                {mission.pointReward} / Kg
+              </h6>
+              <h6 className="text-cyan-400 text-xs mt-1">
+                {mission.xpReward} Exp
+              </h6>
+
+              <div className="mt-4">
+                <Link
+                  href={`/mission/${mission.id}`}
+                  className="bg-blue-500 text-white rounded-lg p-2 text-xs"
+                >
+                  Lihat Selengkapnya
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
-        // <div key={i} className="card card-compact bg-gray-100 shadow-xl">
-        //   <div className="skeleton w-full h-20 bg-gray-400"></div>
-        //   <div className="card-body">
-        //     <h2 className="card-title">{mission.title}</h2>
-        //     <p>{mission.description}</p>
-        //     <div className="card-actions justify-end">
-        //       <Link
-        //         href={`/mission/${mission.id}`}
-        //         className="btn btn-sm btn-accent"
-        //       >
-        //         View More
-        //       </Link>
-        //     </div>
-        //   </div>
-        // </div>
       ))}
     </div>
   ) : null;
