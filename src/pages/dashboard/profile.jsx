@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Input from "@/components/functions/Input";
 import LoadingButton from "@/components/functions/LoadingButton";
 import userApi from "@/api/modules/users.api";
-import { setUser } from "@/redux/features/userSlice";
+import { selectUser, setUser } from "@/redux/features/userSlice";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
 import { getAuth } from "firebase/auth";
@@ -17,6 +17,8 @@ import Link from "next/link";
 export default function Profile() {
   const dispatch = useDispatch();
   const router = useRouter();
+
+  const { user } = useSelector(selectUser);
 
   const [isOnRequest, setIsOnRequest] = useState(false);
   const [errorMessage, setErrorMessage] = useState(undefined);
@@ -55,17 +57,18 @@ export default function Profile() {
 
   useEffect(() => {
     const fetchUserProfile = async () => {
-      const { response, error } = await userApi.getProfile();
-      if (response) profileForm.setValues(response);
-      if (error) setErrorMessage(error.message);
+      if (user) profileForm.setValues(user);
 
+      // const { response, error } = await userApi.getProfile();
+      // if (response) profileForm.setValues(response);
+      // if (error) setErrorMessage(error.message);
       // const auth = getAuth();
       // if (auth.currentUser) {
       //   profileForm.setFieldValue("email", auth.currentUser.email);
       // }
     };
     fetchUserProfile();
-  }, []);
+  }, [user]);
 
   return (
     <div className="bg-white p-6 rounded-xl">
