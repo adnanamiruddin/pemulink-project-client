@@ -58,7 +58,9 @@ export default function Login() {
         if (response) {
           signInForm.resetForm();
           dispatch(setUser(response));
-          toast.success("Login success");
+          toast.success(
+            `Selamat datang kembali ${response.firstName} ${response.lastName}`
+          );
           router.push("/dashboard");
         }
         if (error) setErrorMessage(error.message);

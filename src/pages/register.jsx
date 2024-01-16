@@ -69,7 +69,9 @@ export default function Register() {
         if (response) {
           signUpForm.resetForm();
           dispatch(setUser(response));
-          toast.success("Register success");
+          toast.success(
+            `Selamat datang ${values.firstName} ${values.lastName}`
+          );
           router.push("/dashboard");
         }
         if (error) setErrorMessage(error.message);
