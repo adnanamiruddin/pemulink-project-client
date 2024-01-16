@@ -66,7 +66,7 @@ export default function CompetitionItem({ competition }) {
           <h5 className="font-medium text-2xl">{competition.description}</h5>
           <p className="text-sm">Selesaikan misi dan dapatkan tambahan poin</p>
           <Link
-            href={`/competitions/${competition.id}`}
+            href={`/competition/${competition.id}`}
             className="btn text-base font-normal bg-blue-500 text-white border-0 hover:bg-blue-700"
           >
             Ikut Misi

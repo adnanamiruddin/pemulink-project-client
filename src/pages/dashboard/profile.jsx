@@ -13,6 +13,7 @@ import Image from "next/image";
 import level1Icon from "../../../public/level-1-icon.svg";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import Link from "next/link";
+import { MdErrorOutline } from "react-icons/md";
 
 export default function Profile() {
   const dispatch = useDispatch();
@@ -176,8 +177,8 @@ export default function Profile() {
         </div>
 
         {errorMessage ? (
-          <div role="alert" className="alert alert-error">
-            <span className="material-symbols-outlined">error</span>
+          <div className="alert alert-error mt-4">
+            <MdErrorOutline />
             <span>{errorMessage}</span>
           </div>
         ) : null}

@@ -143,44 +143,5 @@ export default function Login() {
         ) : null}
       </div>
     </div>
-
-    // <form className="flex flex-col gap-4" onSubmit={signInForm.handleSubmit}>
-    //   <Input
-    //     label="Email"
-    //     name="email"
-    //     placeholder="john@gmail.com"
-    //     type="email"
-    //     value={signInForm.values.email}
-    //     onChange={signInForm.handleChange}
-    //     error={
-    //       signInForm.touched.email && signInForm.errors.email !== undefined
-    //     }
-    //     helperText={signInForm.touched.email && signInForm.errors.email}
-    //   />
-    //   <Input
-    //     label="Password"
-    //     name="password"
-    //     placeholder="********"
-    //     type="password"
-    //     value={signInForm.values.password}
-    //     onChange={signInForm.handleChange}
-    //     error={
-    //       signInForm.touched.password &&
-    //       signInForm.errors.password !== undefined
-    //     }
-    //     helperText={signInForm.touched.password && signInForm.errors.password}
-    //   />
-
-    //   <LoadingButton type="submit" loading={isLoginRequest}>
-    //     Login
-    //   </LoadingButton>
-
-    //   {errorMessage ? (
-    //     <div role="alert" className="alert alert-error">
-    //       <span className="material-symbols-outlined">error</span>
-    //       <span>{errorMessage}</span>
-    //     </div>
-    //   ) : null}
-    // </form>
   );
 }
