@@ -26,6 +26,7 @@ export default function WeeklyMissionItem({ mission }) {
             <Image src={missionPointIcon} alt="Mission Point Icon" />
             {mission.pointReward} / Kg
           </h6>
+
           <h6 className="text-cyan-400 text-xs mt-1">{mission.xpReward} Exp</h6>
 
           <div className="mt-4">

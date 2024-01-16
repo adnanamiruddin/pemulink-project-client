@@ -11,6 +11,8 @@ import { setGlobalLoading } from "@/redux/features/globalLoadingSlice";
 import ProtectedPage from "@/components/utils/ProtectedPage";
 import DashboardNewAccInfo from "@/components/layouts/DashboardNewAccInfo";
 import WeeklyMissionItem from "@/components/layouts/WeeklyMissionItem";
+import CompetitionItem from "@/components/layouts/CompetitionItem";
+import competitionsApi from "@/api/modules/competitions.api";
 
 export default function Dashboard() {
   const dispatch = useDispatch();
@@ -19,14 +21,19 @@ export default function Dashboard() {
 
   const [missions, setMissions] = useState([]);
   const [level, setLevel] = useState(1);
+  const [competitions, setCompetitions] = useState([]);
 
   useEffect(() => {
     const fetchMissions = async () => {
       dispatch(setGlobalLoading(true));
       const { response, error } = await missionsApi.getAllWeeklyMissions();
+      const { response: competitionsResponse, error: competitionsError } =
+        await competitionsApi.getAllCompetitions();
       dispatch(setGlobalLoading(false));
       if (response) setMissions(response);
       if (error) toast.error(error.message);
+      if (competitionsResponse) setCompetitions(competitionsResponse);
+      if (competitionsError) toast.error(competitionsError.message);
     };
     fetchMissions();
   }, [dispatch]);
@@ -47,11 +54,16 @@ export default function Dashboard() {
         <UserBadge user={user} level={level} />
 
         <h2 className="font-bold text-2xl">Misi Mingguan</h2>
-
         {missions.map((mission, i) => (
           <WeeklyMissionItem key={i} mission={mission} />
         ))}
       </div>
+
+      {competitions.length > 0
+        ? competitions.map((competition, i) => (
+            <CompetitionItem key={i} competition={competition} />
+          ))
+        : null}
     </ProtectedPage>
   );
 }
