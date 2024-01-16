@@ -34,7 +34,7 @@ export default function UserLevel({ user, level, setLevel }) {
   return (
     <div className="bg-white p-4 rounded-lg">
       <div className="flex items-center gap-4">
-        <Image src={level1Icon} alt={`level ${level} icon`} />
+        <Image src={level1Icon} alt={`Level ${level} Icon`} />
         <div className="">
           <h4 className="font-bold text-xl">Level {level}</h4>
           <h6 className="text-gray-400 text-sm">

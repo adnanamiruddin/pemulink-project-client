@@ -186,14 +186,7 @@ export default function Register() {
             }
           />
           <div></div>
-          <LoadingButton
-            type="submit"
-            loading={isLoginRequest}
-            className="mt-4"
-            onClick={signUpForm.handleSubmit}
-          >
-            Buat Akun
-          </LoadingButton>
+          <LoadingButton loading={isLoginRequest}>Buat Akun</LoadingButton>
           <p className="text-justify text-xs text-gray-400">
             Dengan melanjutkan, Anda menyetujui{" "}
             <span className="text-blue-500">

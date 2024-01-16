@@ -11,7 +11,7 @@ import { toast } from "react-toastify";
 import { setGlobalLoading } from "@/redux/features/globalLoadingSlice";
 import missionPointIcon from "../../../public/mission-point-icon.svg";
 import ProtectedPage from "@/components/utils/ProtectedPage";
-import { HiOutlineInformationCircle } from "react-icons/hi2";
+import DashboardNewAccInfo from "@/components/layouts/DashboardNewAccInfo";
 
 export default function Dashboard() {
   const dispatch = useDispatch();
@@ -35,20 +35,7 @@ export default function Dashboard() {
   return (
     <ProtectedPage>
       <div className="flex flex-col gap-6">
-        <div className="bg-red-400 text-white px-3 py-4 rounded-xl flex justify-between items-center gap-3">
-          <div>
-            <HiOutlineInformationCircle className="text-3xl" />
-          </div>
-          <h4 className="text-xs">
-            Profil kamu belum lengkap. Tekan untuk melengkapi profil sekarang.
-          </h4>
-          <Link
-            href="/dashboard/profile"
-            className="btn btn-sm border-0 bg-gray-100 text-red-500 font-normal hover:bg-gray-300"
-          >
-            <button>Lengkapi Profil</button>
-          </Link>
-        </div>
+        {user?.city === null ? <DashboardNewAccInfo /> : null}
 
         <div className="flex gap-4">
           <UserLevel user={user} level={level} setLevel={setLevel} />

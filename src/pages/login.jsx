@@ -132,14 +132,7 @@ export default function Login() {
           <Link href="/" className="mb-3 text-end">
             <p className="text-blue-600">Lupa kata sandi?</p>
           </Link>
-          <LoadingButton
-            type="submit"
-            loading={isLoginRequest}
-            className="mt-4"
-            onClick={signInForm.handleSubmit}
-          >
-            Masuk
-          </LoadingButton>
+          <LoadingButton loading={isLoginRequest}>Masuk</LoadingButton>
         </form>
 
         {errorMessage ? (

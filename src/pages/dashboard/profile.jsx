@@ -9,6 +9,10 @@ import { setUser } from "@/redux/features/userSlice";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
 import { getAuth } from "firebase/auth";
+import Image from "next/image";
+import level1Icon from "../../../public/level-1-icon.svg";
+import { AiOutlineArrowLeft } from "react-icons/ai";
+import Link from "next/link";
 
 export default function Profile() {
   const dispatch = useDispatch();
@@ -20,20 +24,20 @@ export default function Profile() {
   const profileForm = useFormik({
     enableReinitialize: true,
     initialValues: {
-      email: "",
-      fullName: "",
-      age: 0,
+      firstName: "",
+      lastName: "",
+      age: "",
       city: "",
       address: "",
       phoneNumber: "",
     },
     validationSchema: Yup.object({
-      email: Yup.string().email().required("Email is required"),
-      fullName: Yup.string().required("Full name is required"),
-      age: Yup.number().required("Age is required"),
-      city: Yup.string().required("City is required"),
-      address: Yup.string().required("Address is required"),
-      phoneNumber: Yup.string().required("Phone number is required"),
+      firstName: Yup.string().required("Nama depan harus diisi"),
+      lastName: Yup.string().required("Nama belakang harus diisi"),
+      age: Yup.number().required("Umur harus diisi"),
+      city: Yup.string().required("Kota harus diisi"),
+      address: Yup.string().required("Alamat harus diisi"),
+      phoneNumber: Yup.string().required("Nomor telepon (WA) harus diisi"),
     }),
     onSubmit: async (values) => {
       setIsOnRequest(true);
@@ -42,8 +46,8 @@ export default function Profile() {
       if (response) {
         profileForm.resetForm();
         dispatch(setUser(response));
-        toast.success("Update profile success");
-        router.push("/");
+        toast.success("Profil berhasil diperbarui");
+        router.push("/dashboard");
       }
       if (error) setErrorMessage(error.message);
     },
@@ -55,103 +59,126 @@ export default function Profile() {
       if (response) profileForm.setValues(response);
       if (error) setErrorMessage(error.message);
 
-      const auth = getAuth();
-      if (auth.currentUser) {
-        profileForm.setFieldValue("email", auth.currentUser.email);
-      }
+      // const auth = getAuth();
+      // if (auth.currentUser) {
+      //   profileForm.setFieldValue("email", auth.currentUser.email);
+      // }
     };
     fetchUserProfile();
   }, []);
 
   return (
-    <form className="flex flex-col gap-4" onSubmit={profileForm.handleSubmit}>
-      <Input
-        label="Email"
-        name="email"
-        placeholder="john@gmail.com"
-        type="email"
-        value={profileForm.values.email}
-        onChange={profileForm.handleChange}
-        error={
-          profileForm.touched.email && profileForm.errors.email !== undefined
-        }
-        helperText={profileForm.touched.email && profileForm.errors.email}
-        disabled
-      />
-      <Input
-        label="Full Name"
-        name="fullName"
-        placeholder="John Doe"
-        type="text"
-        value={profileForm.values.fullName}
-        onChange={profileForm.handleChange}
-        error={
-          profileForm.touched.fullName &&
-          profileForm.errors.fullName !== undefined
-        }
-        helperText={profileForm.touched.fullName && profileForm.errors.fullName}
-      />
-      <Input
-        label="Age"
-        name="age"
-        placeholder="18"
-        type="number"
-        value={profileForm.values.age}
-        onChange={profileForm.handleChange}
-        error={profileForm.touched.age && profileForm.errors.age !== undefined}
-        helperText={profileForm.touched.age && profileForm.errors.age}
-      />
-      <Input
-        label="City"
-        name="city"
-        placeholder="Makassar"
-        type="text"
-        value={profileForm.values.city}
-        onChange={profileForm.handleChange}
-        error={
-          profileForm.touched.city && profileForm.errors.city !== undefined
-        }
-        helperText={profileForm.touched.city && profileForm.errors.city}
-      />
-      <Input
-        label="Address"
-        name="address"
-        placeholder="Jl. Jendral Sudirman No. 1"
-        type="text"
-        value={profileForm.values.address}
-        onChange={profileForm.handleChange}
-        error={
-          profileForm.touched.address &&
-          profileForm.errors.address !== undefined
-        }
-        helperText={profileForm.touched.address && profileForm.errors.address}
-      />
-      <Input
-        label="Phone Number"
-        name="phoneNumber"
-        placeholder="08123456789"
-        type="text"
-        value={profileForm.values.phoneNumber}
-        onChange={profileForm.handleChange}
-        error={
-          profileForm.touched.phoneNumber &&
-          profileForm.errors.phoneNumber !== undefined
-        }
-        helperText={
-          profileForm.touched.phoneNumber && profileForm.errors.phoneNumber
-        }
-      />
+    <div className="bg-white p-6 rounded-xl">
+      <div className="flex items-center gap-3">
+        <Link href="/dashboard">
+          <AiOutlineArrowLeft className="text-xl" />
+        </Link>
+        <h1 className="text-xl font-semibold">Lengkapi Profil</h1>
+      </div>
 
-      <LoadingButton type="submit" loading={isOnRequest}>
-        Update Profile
-      </LoadingButton>
+      <form
+        className="flex flex-col gap-3 items-center mt-12"
+        onSubmit={profileForm.handleSubmit}
+      >
+        <Image src={level1Icon} alt="Level 1 Icon" className="w-20 mb-4" />
 
-      {errorMessage ? (
-        <div role="alert" className="alert alert-error">
-          <span className="material-symbols-outlined">error</span>
-          <span>{errorMessage}</span>
+        <div className="flex gap-2">
+          <Input
+            label="Nama Depan"
+            name="firstName"
+            placeholder="Nama Depan"
+            type="text"
+            value={profileForm.values.firstName}
+            onChange={profileForm.handleChange}
+            error={
+              profileForm.touched.firstName &&
+              profileForm.errors.firstName !== undefined
+            }
+            helperText={
+              profileForm.touched.firstName && profileForm.errors.firstName
+            }
+          />
+          <Input
+            label="Nama Belakang"
+            name="lastName"
+            placeholder="Nama Belakang"
+            type="text"
+            value={profileForm.values.lastName}
+            onChange={profileForm.handleChange}
+            error={
+              profileForm.touched.lastName &&
+              profileForm.errors.lastName !== undefined
+            }
+            helperText={
+              profileForm.touched.lastName && profileForm.errors.lastName
+            }
+          />
         </div>
-      ) : null}
-    </form>
+
+        <Input
+          label="Umur"
+          name="age"
+          placeholder="18"
+          type="number"
+          value={profileForm.values.age}
+          onChange={profileForm.handleChange}
+          error={
+            profileForm.touched.age && profileForm.errors.age !== undefined
+          }
+          helperText={profileForm.touched.age && profileForm.errors.age}
+        />
+        <Input
+          label="Asal Kota"
+          name="city"
+          placeholder="Makassar"
+          type="text"
+          value={profileForm.values.city}
+          onChange={profileForm.handleChange}
+          error={
+            profileForm.touched.city && profileForm.errors.city !== undefined
+          }
+          helperText={profileForm.touched.city && profileForm.errors.city}
+        />
+        <Input
+          label="Alamat"
+          name="address"
+          placeholder="Jl. Jendral Sudirman No. 1"
+          type="text"
+          value={profileForm.values.address}
+          onChange={profileForm.handleChange}
+          error={
+            profileForm.touched.address &&
+            profileForm.errors.address !== undefined
+          }
+          helperText={profileForm.touched.address && profileForm.errors.address}
+        />
+        <Input
+          label="Nomor (WA)"
+          name="phoneNumber"
+          placeholder="08123456789"
+          type="text"
+          value={profileForm.values.phoneNumber}
+          onChange={profileForm.handleChange}
+          error={
+            profileForm.touched.phoneNumber &&
+            profileForm.errors.phoneNumber !== undefined
+          }
+          helperText={
+            profileForm.touched.phoneNumber && profileForm.errors.phoneNumber
+          }
+        />
+
+        <div className="w-full mt-4">
+          <LoadingButton loading={isOnRequest}>Simpan</LoadingButton>
+        </div>
+
+        {errorMessage ? (
+          <div role="alert" className="alert alert-error">
+            <span className="material-symbols-outlined">error</span>
+            <span>{errorMessage}</span>
+          </div>
+        ) : null}
+      </form>
+    </div>
   );
 }

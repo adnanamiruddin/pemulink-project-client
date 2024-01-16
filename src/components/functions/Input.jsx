@@ -13,7 +13,7 @@ export default function Input({
     <label className="form-control w-full max-w-xs">
       {label ? (
         <div className="label">
-          <span className="label-text">{label}</span>
+          <span className="label-text text-black">{label}</span>
         </div>
       ) : null}
       <input
@@ -22,7 +22,7 @@ export default function Input({
         value={value}
         placeholder={placeholder}
         onChange={onChange}
-        disabled={disabled ? disabled : false}
+        disabled={disabled}
         className="input input-bordered w-full max-w-xs bg-gray-100"
       />
       {error ? (
