@@ -1,6 +1,7 @@
 import Image from "next/image";
 import level1Icon from "../../../public/level-1-icon.svg";
 import { useEffect, useState } from "react";
+import { FaRegStar } from "react-icons/fa";
 
 export default function UserLevel({ user, level, setLevel }) {
   const [currentXP, setCurrentXP] = useState(0);
@@ -43,20 +44,33 @@ export default function UserLevel({ user, level, setLevel }) {
         </div>
       </div>
 
-      <div className="mt-6 bg-gradient-to-r from-yellow-300 to-yellow-100 rounded-full relative h-7 flex justify-between">
+      <div className="mt-6 bg-amber-100 rounded-full relative h-7 flex justify-between">
         <div
-          className="rounded-full bg-gradient-to-r from-yellow-300 to-yellow-500 absolute top-0 left-0 h-full"
+          className="rounded-full bg-gradient-to-r from-amber-300 to-amber-500 absolute top-0 left-0 h-full"
           style={{
             width: `${(currentXP / nextLevelXP) * 100}%`,
           }}
         ></div>
-        <div className="rounded-full border-2 border-yellow-600 w-7 h-7 text-center relative font-semibold">
+        <div className="rounded-full w-7 h-7 text-center relative font-semibold bg-amber-300 border-2 text-stone-500 border-amber-400">
           {level}
         </div>
-        <p className="absolute top-0 left-0 h-full w-full flex items-center justify-center text-stone-700 font-semibold">
-          {currentXP} / {nextLevelXP}
+        <p
+          className={`absolute top-0 left-0 h-full w-full flex items-center justify-center font-semibold  ${
+            (currentXP / nextLevelXP) * 100 <= 70
+              ? "text-stone-400"
+              : "text-stone-700"
+          }`}
+        >
+          <FaRegStar className="mr-2" />
+          <span className="text-stone-700">{currentXP}</span>/{nextLevelXP}
         </p>
-        <div className="rounded-full border-2 border-yellow-600 w-7 h-7 text-center relative font-semibold">
+        <div
+          className={`rounded-full w-7 h-7 text-center relative font-semibold ${
+            (currentXP / nextLevelXP) * 100 >= 95
+              ? "bg-amber-500 text-stone-500"
+              : "bg-amber-200"
+          } `}
+        >
           {level + 1}
         </div>
       </div>
