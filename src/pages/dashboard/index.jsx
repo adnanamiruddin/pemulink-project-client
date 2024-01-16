@@ -1,5 +1,4 @@
 import missionsApi from "@/api/modules/missions.api";
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,9 +8,9 @@ import leaderbordIcon from "../../../public/leaderboard-icon.svg";
 import UserBadge from "@/components/layouts/UserBadge";
 import { toast } from "react-toastify";
 import { setGlobalLoading } from "@/redux/features/globalLoadingSlice";
-import missionPointIcon from "../../../public/mission-point-icon.svg";
 import ProtectedPage from "@/components/utils/ProtectedPage";
 import DashboardNewAccInfo from "@/components/layouts/DashboardNewAccInfo";
+import WeeklyMissionItem from "@/components/layouts/WeeklyMissionItem";
 
 export default function Dashboard() {
   const dispatch = useDispatch();
@@ -50,43 +49,7 @@ export default function Dashboard() {
         <h2 className="font-bold text-2xl">Misi Mingguan</h2>
 
         {missions.map((mission, i) => (
-          <div key={i} className="bg-white p-4 rounded-xl">
-            <div className="flex justify-between">
-              <div className="w-1/2">
-                <Image
-                  src={mission.imageURL}
-                  alt={mission.title}
-                  layout="responsive"
-                  width={100}
-                  height={100}
-                />
-              </div>
-
-              <div>
-                <h4 className="font-medium text-sm">{mission.title}</h4>
-                <h6 className="text-gray-400 text-xs mt-1">
-                  {mission.description.substring(0, 75)}...
-                </h6>
-
-                <h6 className="text-blue-500 text-xs flex items-center gap-1 mt-3">
-                  <Image src={missionPointIcon} alt="Mission Point Icon" />
-                  {mission.pointReward} / Kg
-                </h6>
-                <h6 className="text-cyan-400 text-xs mt-1">
-                  {mission.xpReward} Exp
-                </h6>
-
-                <div className="mt-4">
-                  <Link
-                    href={`/mission/${mission.id}`}
-                    className="bg-blue-500 text-white rounded-lg p-2 text-xs"
-                  >
-                    Lihat Selengkapnya
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </div>
+          <WeeklyMissionItem key={i} mission={mission} />
         ))}
       </div>
     </ProtectedPage>
