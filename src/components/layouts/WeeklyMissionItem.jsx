@@ -18,21 +18,19 @@ export default function WeeklyMissionItem({ mission }) {
 
         <div>
           <h4 className="font-medium text-sm">{mission.title}</h4>
-          <h6 className="text-gray-400 text-xs mt-1">
-            {mission.description.substring(0, 75)}...
-          </h6>
+          <h6 className="text-gray-400 text-xs mt-1">{mission.subTitle}</h6>
 
           <h6 className="text-blue-500 text-xs flex items-center gap-1 mt-3">
             <Image src={missionPointIcon} alt="Mission Point Icon" />
             {mission.pointReward} / Kg
           </h6>
 
-          <h6 className="text-cyan-400 text-xs mt-1">{mission.xpReward} Exp</h6>
+          <h6 className="text-cyan-400 text-xs mt-1">{mission.xpReward} exp</h6>
 
           <div className="mt-4">
             <Link
               href={`/mission/${mission.id}`}
-              className="bg-blue-500 text-white rounded-lg p-2 text-xs"
+              className="bg-blue-500 text-white rounded-lg p-2 text-xs hover:bg-blue-700"
             >
               Lihat Selengkapnya
             </Link>

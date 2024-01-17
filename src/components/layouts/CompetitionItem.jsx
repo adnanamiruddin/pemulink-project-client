@@ -63,7 +63,7 @@ export default function CompetitionItem({ competition }) {
 
       <div className="mt-4 flex items-center gap-2">
         <div className="flex flex-col gap-4 basis-1/3">
-          <h5 className="font-medium text-2xl">{competition.description}</h5>
+          <h5 className="font-medium text-2xl">{competition.subTitle}</h5>
           <p className="text-sm">Selesaikan misi dan dapatkan tambahan poin</p>
           <Link
             href={`/competition/${competition.id}`}
@@ -87,16 +87,20 @@ export default function CompetitionItem({ competition }) {
                     />
                   </div>
 
-                  <div className="p-4 flex flex-col gap-2">
+                  <div className="p-4 flex flex-col gap-2.5">
                     <h4 className="font-medium text-lg">{mission.title}</h4>
 
                     <h6 className="text-xs text-gray-400">
-                      {mission.description}
+                      {mission.subTitle}
                     </h6>
 
                     <h6 className="text-blue-500 text-sm font-medium flex items-center gap-1">
                       <Image src={missionPointIcon} alt="Mission Point Icon" />
                       {mission.pointReward} / Kg
+                    </h6>
+
+                    <h6 className="text-green-500 text-xs font-medium">
+                      {mission.xpReward} exp
                     </h6>
                   </div>
                 </div>
