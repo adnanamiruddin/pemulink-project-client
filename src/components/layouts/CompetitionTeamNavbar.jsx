@@ -5,7 +5,7 @@ import joinTeamIcon from "../../../public/join-team-icon.png";
 
 export default function CompetitionTeamNavbar({ id }) {
   return (
-    <>
+    <div>
       <h3 className="text-lg">Kolaborasi</h3>
       <div className="flex items-center gap-3 mt-3">
         <Link href={`/competition/${id}`} className="w-1/2">
@@ -22,6 +22,6 @@ export default function CompetitionTeamNavbar({ id }) {
           </div>
         </Link>
       </div>
-    </>
+    </div>
   );
 }

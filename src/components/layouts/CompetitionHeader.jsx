@@ -1,8 +1,24 @@
+import userApi from "@/api/modules/users.api";
+import { setGlobalLoading } from "@/redux/features/globalLoadingSlice";
 import Link from "next/link";
+import { useEffect } from "react";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { HiOutlineInformationCircle } from "react-icons/hi2";
+import { useDispatch } from "react-redux";
 
-export default function CompetitionHeader() {
+export default function CompetitionHeader({ competitionId, setUserTeam }) {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const authUser = async () => {
+      dispatch(setGlobalLoading(true));
+      const { response } = await userApi.getUserTeam({ competitionId });
+      dispatch(setGlobalLoading(false));
+      if (response) setUserTeam(response);
+    };
+    authUser();
+  }, [dispatch, competitionId]);
+
   return (
     <div className="mt-4 flex flex-col gap-8">
       <div className="flex items-center gap-3">

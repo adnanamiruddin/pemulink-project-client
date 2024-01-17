@@ -6,6 +6,7 @@ const usersEndpoint = {
   signIn: "/users/sign-in",
   profile: "/users/profile",
   updateToAdmin: ({ id }) => `/users/update-to-admin/${id}`,
+  userTeam: ({ competitionId }) => `/users/${competitionId}`,
 };
 
 const userApi = {
@@ -36,6 +37,17 @@ const userApi = {
   getProfile: async () => {
     try {
       const response = await privateClient.get(usersEndpoint.profile);
+      return { response };
+    } catch (error) {
+      return { error };
+    }
+  },
+
+  getUserTeam: async ({ competitionId }) => {
+    try {
+      const response = await privateClient.get(
+        usersEndpoint.userTeam({ competitionId })
+      );
       return { response };
     } catch (error) {
       return { error };
