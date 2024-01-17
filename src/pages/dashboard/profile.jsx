@@ -8,12 +8,12 @@ import userApi from "@/api/modules/users.api";
 import { selectUser, setUser } from "@/redux/features/userSlice";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
-import { getAuth } from "firebase/auth";
 import Image from "next/image";
 import level1Icon from "../../../public/level-1-icon.svg";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import Link from "next/link";
 import { MdErrorOutline } from "react-icons/md";
+import { setGlobalLoading } from "@/redux/features/globalLoadingSlice";
 
 export default function Profile() {
   const dispatch = useDispatch();

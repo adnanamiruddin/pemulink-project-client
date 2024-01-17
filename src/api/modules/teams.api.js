@@ -1,10 +1,10 @@
 import privateClient from "../clients/private.client";
 
 const teamsEndpoint = {
-  teams: ({ competitionId }) => `/competitions/${competitionId}/teams`,
-  joinTeam: ({ competitionId }) => `/competitions/${competitionId}/teams/join`,
+  teams: ({ competitionId }) => `/competitions/teams/${competitionId}`,
+  joinTeam: ({ competitionId }) => `/competitions/teams/${competitionId}/join`,
   teamById: ({ competitionId, teamId }) =>
-    `/competitions/${competitionId}/teams/${teamId}`,
+    `/competitions/teams/${competitionId}/${teamId}`,
 };
 
 const teamsApi = {

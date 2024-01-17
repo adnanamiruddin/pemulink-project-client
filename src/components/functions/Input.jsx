@@ -13,7 +13,7 @@ export default function Input({
     <label className="form-control w-full max-w-xs">
       {label ? (
         <div className="label">
-          <span className="label-text text-black">{label}</span>
+          <span className="label-text text-black text-lg">{label}</span>
         </div>
       ) : null}
       <input
