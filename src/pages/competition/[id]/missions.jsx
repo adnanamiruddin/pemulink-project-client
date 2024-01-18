@@ -44,15 +44,16 @@ export default function CompetitionMissions() {
         </p>
       </div>
 
-      <div className="mt-4 flex flex-col gap-2">
+      <div className="mt-4 flex flex-col gap-3">
         {missions.map((mission) => (
           <div key={mission.id} className="bg-white p-4 rounded-xl flex gap-6">
-            <div className="py-3 px-1 rounded-xl bg-gray-100">
+            <div className="py-3 px-1 rounded-xl bg-gray-100 flex justify-center items-center">
               <Image
                 src={mission.imageURL}
                 alt={mission.title}
                 width={100}
                 height={100}
+                className="object-contain"
               />
             </div>
 
@@ -74,7 +75,7 @@ export default function CompetitionMissions() {
                 </h6>
               </div>
 
-              <div className="mt-3">
+              <div className="self-center mt-3">
                 <Link
                   href={`/mission/${mission.id}`}
                   className="bg-blue-500 text-white rounded-lg p-1 px-3 text-xs hover:bg-blue-700"

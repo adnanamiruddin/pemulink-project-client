@@ -2,37 +2,11 @@ import Image from "next/image";
 import Link from "next/link";
 import missionPointIcon from "../../../public/mission-point-icon.svg";
 import { PiBroomDuotone } from "react-icons/pi";
-import { useEffect, useState } from "react";
 import Timer from "../functions/Timer";
 
 export default function WeeklyMissionItem({ mission }) {
-  const [timeRemaining, setTimeRemaining] = useState(calculateTimeRemaining());
-
-  function calculateTimeRemaining() {
-    const endTime = new Date(mission.endAt).getTime();
-    const now = new Date().getTime();
-    const difference = endTime - now;
-
-    const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-    const hours = Math.floor(
-      (difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-    );
-    const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-
-    return { days, hours, minutes, seconds };
-  }
-
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      setTimeRemaining(calculateTimeRemaining());
-    }, 1000);
-    // Cleaning interval when components are unmounted
-    return () => clearInterval(intervalId);
-  }, []);
-
   return (
-    <div className="bg-white p-4 rounded-xl">
+    <div className="bg-white p-6 rounded-xl">
       <div className="flex justify-between">
         <div className="flex items-center gap-2.5">
           <PiBroomDuotone className="text-3xl" />
@@ -57,26 +31,24 @@ export default function WeeklyMissionItem({ mission }) {
           />
         </div>
 
-        <div className="w-2/5 flex flex-col gap-4">
-          <div>
-            <h4 className="font-medium text-sm">{mission.title}</h4>
-            <h6 className="text-gray-400 text-xs mt-1">{mission.subTitle}</h6>
-          </div>
+        <div className="w-3/5">
+          <h4 className="font-medium text-sm">{mission.title}</h4>
+          <h6 className="text-gray-400 text-xs mt-1">{mission.subTitle}</h6>
 
-          <div className="flex justify-between items-center">
+          <div className="flex justify-between items-center mt-3">
             <h6 className="text-blue-500 text-xs flex items-center gap-1 font-medium">
               <Image src={missionPointIcon} alt="Mission Point Icon" />
-              {mission.pointReward} / Kg
+              {mission.pointReward} Poin / Kg
             </h6>
             <h6 className="text-cyan-400 text-xs font-medium">
               {mission.xpReward} exp
             </h6>
           </div>
 
-          <div className="">
+          <div className="mt-4">
             <Link
               href={`/mission/${mission.id}`}
-              className="bg-blue-500 text-white rounded-lg p-2 text-xs hover:bg-blue-700"
+              className="bg-blue-500 text-white rounded-xl py-2 px-7 text-xs hover:bg-blue-700"
             >
               Lihat Selengkapnya
             </Link>
