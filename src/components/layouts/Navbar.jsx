@@ -42,9 +42,9 @@ export default function Navbar() {
             <>
               <Link
                 href="/dashboard"
-                className={`py-4 px-2 ${
+                className={`py-4 px-2 border-b-2 hover:border-blue-600 hover:text-blue-600 ${
                   router.asPath === "/dashboard"
-                    ? "border-b-2 border-blue-600 text-blue-600"
+                    ? "border-blue-600 text-blue-600"
                     : ""
                 }`}
               >
@@ -52,9 +52,9 @@ export default function Navbar() {
               </Link>
               <Link
                 href="/dashboard/profile"
-                className={`py-4 px-2 ${
+                className={`py-4 px-2 border-b-2 hover:border-blue-600 hover:text-blue-600 ${
                   router.asPath === "/dashboard/profile"
-                    ? "border-b-2 border-blue-600 text-blue-600"
+                    ? "border-blue-600 text-blue-600"
                     : ""
                 }`}
               >
@@ -62,9 +62,9 @@ export default function Navbar() {
               </Link>
               <Link
                 href="/dashboard/"
-                className={`py-4 px-2 ${
+                className={`py-4 px-2 border-b-2 hover:border-blue-600 hover:text-blue-600 ${
                   router.asPath === "/dashboard/subscribe"
-                    ? "border-b-2 border-blue-600 text-blue-600"
+                    ? "border-blue-600 text-blue-600"
                     : ""
                 }`}
               >
@@ -77,8 +77,8 @@ export default function Navbar() {
           ) : (
             <Link
               href="/login"
-              className={`btn-ghost text-gray-500 font-medium text-lg rounded-xl hover:text-gray-900 p-4 ${
-                router.asPath === "/login" ? "bg-gray-100 text-gray-700" : ""
+              className={`p-4 border-b-2 hover:border-blue-600 hover:text-blue-600 ${
+                router.asPath === "/login" ? "border-blue-600 text-blue-600" : ""
               }`}
             >
               Login

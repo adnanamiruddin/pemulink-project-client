@@ -30,7 +30,7 @@ export default function GlobalLoading() {
 
   return (
     <div
-      className={`min-h-screen fixed flex justify-center items-center bg-blue-50 z-[999] transition-all duration-300 ease-in-out ${
+      className={`min-h-screen w-full fixed flex justify-center items-center bg-blue-50 z-[999] transition-all duration-300 ease-in-out ${
         isLoading ? "opacity-100" : "opacity-0"
       } ${isHidden ? "hidden" : ""}`}
     >

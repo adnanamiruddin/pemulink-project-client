@@ -5,9 +5,9 @@ import Navbar from "@/components/layouts/Navbar";
 import { setUser } from "@/redux/features/userSlice";
 import { ToastContainer } from "react-toastify";
 import GlobalLoading from "@/components/layouts/GlobalLoading";
+import Footer from "@/components/layouts/Footer";
 
 import "react-toastify/dist/ReactToastify.css";
-import Footer from "@/components/layouts/Footer";
 
 export default function MainLayout({ children }) {
   const dispatch = useDispatch();
@@ -43,7 +43,7 @@ export default function MainLayout({ children }) {
 
       <Navbar />
       <div className="bg-gray-300 flex justify-center">
-        <div className="p-6 pt-20 text-black bg-blue-50 min-h-screen max-w-sm">
+        <div className="p-6 pt-20 text-black bg-blue-50 min-h-screen max-w-sm md:pt-24">
           {children}
         </div>
       </div>
