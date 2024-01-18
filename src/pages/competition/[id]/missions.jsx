@@ -1,7 +1,15 @@
+import CompetitionHeader from "@/components/layouts/CompetitionHeader";
+import { useRouter } from "next/router";
 
+export default function CompetitionMissions() {
+  const router = useRouter();
+  const { id } = router.query;
 
-export default function missions() {
   return (
-    <div>missions</div>
-  )
+    <div>
+      <CompetitionHeader competitionId={id} />
+
+      <h1>Missions</h1>
+    </div>
+  );
 }
