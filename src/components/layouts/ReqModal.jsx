@@ -41,12 +41,12 @@ export default function ReqModal({ mission }) {
   return (
     <div>
       <button
-        className="btn w-full bg-blue-500 text-white border-0"
+        className="btn w-full bg-blue-500 text-white border-0 text-lg font-normal hover:bg-blue-700"
         onClick={() =>
           document.getElementById("acceptance_req_modal").showModal()
         }
       >
-        Kirim Permintaan Penerimaan Misi
+        Upload Bukti Foto Sampah
       </button>
 
       <dialog

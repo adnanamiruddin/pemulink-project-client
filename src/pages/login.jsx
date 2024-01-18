@@ -59,14 +59,12 @@ export default function Login() {
         if (response) {
           signInForm.resetForm();
           dispatch(setUser(response));
-          toast.success(
-            `Selamat datang kembali ${response.firstName} ${response.lastName}`
-          );
+          toast.success(`Selamat datang kembali ${response.firstName}`);
           router.push("/dashboard");
         }
         if (error) setErrorMessage(error.message);
       } catch (error) {
-        setErrorMessage(error.message);
+        setErrorMessage("Login gagal. Pastikan email dan password benar");
       } finally {
         setIsOnRequest(false);
       }
@@ -137,8 +135,8 @@ export default function Login() {
         </form>
 
         {errorMessage ? (
-          <div className="alert alert-error mt-4">
-            <MdErrorOutline />
+          <div className="alert alert-error mt-4 text-white text-sm">
+            <MdErrorOutline className="text-3xl" />
             <span>{errorMessage}</span>
           </div>
         ) : null}
