@@ -10,6 +10,9 @@ import Timer from "../functions/Timer";
 export default function CompetitionItem({ competition }) {
   const [missions, setMissions] = useState([]);
 
+  const isStarted =
+    new Date(competition.startedAt).getTime() >= new Date().getTime();
+
   useEffect(() => {
     const fetchMissions = async () => {
       const { response, error } =
@@ -30,8 +33,11 @@ export default function CompetitionItem({ competition }) {
       </h3>
 
       <div className="flex items-center gap-2">
-        <p className="text-sm">Berakhir dalam</p>
-        <Timer data={competition} color="blue" />
+        <p className="text-sm">{isStarted ? "Dimulai" : "Berakhir"} dalam</p>
+        <Timer
+          data={isStarted ? competition.startedAt : competition.endAt}
+          color={isStarted ? "yellow" : "blue"}
+        />
       </div>
 
       <div className="mt-10 flex items-center gap-2">

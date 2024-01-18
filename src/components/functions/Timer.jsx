@@ -5,7 +5,7 @@ export default function Timer({ data, color }) {
   const [timeRemaining, setTimeRemaining] = useState(calculateTimeRemaining());
 
   function calculateTimeRemaining() {
-    const endTime = new Date(data.endAt).getTime();
+    const endTime = new Date(data).getTime();
     const now = new Date().getTime();
     const difference = endTime - now;
 
@@ -30,7 +30,11 @@ export default function Timer({ data, color }) {
   return (
     <div
       className={`${
-        color === "blue" ? "bg-sky-400" : "bg-pink-500"
+        color === "blue"
+          ? "bg-sky-400"
+          : color === "yellow"
+          ? "bg-amber-500"
+          : "bg-pink-500"
       } rounded-full px-3 py-1 text-white text-xs flex items-center gap-1`}
     >
       <LuTimer className="text-xl" />

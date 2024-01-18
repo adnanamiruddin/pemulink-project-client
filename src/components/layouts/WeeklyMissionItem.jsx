@@ -15,7 +15,7 @@ export default function WeeklyMissionItem({ mission }) {
 
         <div className="flex flex-col justify-center items-center gap-1">
           <p className="text-sm">Berakhir dalam</p>
-          <Timer data={mission} />
+          <Timer data={mission.endAt} />
         </div>
       </div>
 
