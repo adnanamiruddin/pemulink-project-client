@@ -1,4 +1,4 @@
-import CompetitionHeader from "@/components/layouts/CompetitionHeader";
+import CompetitionHeader from "@/components/layouts/CompetitionPage";
 import { useRouter } from "next/router";
 
 export default function CompetitionMissions() {

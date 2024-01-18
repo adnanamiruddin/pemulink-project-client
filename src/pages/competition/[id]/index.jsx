@@ -3,7 +3,7 @@ import teamsApi from "@/api/modules/teams.api";
 import Input from "@/components/functions/Input";
 import LoadingButton from "@/components/functions/LoadingButton";
 import AvatarItem from "@/components/layouts/AvatarItem";
-import CompetitionHeader from "@/components/layouts/CompetitionHeader";
+import CompetitionPage from "@/components/layouts/CompetitionPage";
 import CompetitionTeamNavbar from "@/components/layouts/CompetitionTeamNavbar";
 import { useFormik } from "formik";
 import { useRouter } from "next/router";
@@ -86,80 +86,73 @@ export default function CreateTeam() {
   }, [avatars, selectedAvatar]);
 
   return (
-    <div>
-      <CompetitionHeader competitionId={id} setUserTeam={setUserTeam} />
+    <CompetitionPage competitionId={id} setUserTeam={setUserTeam}>
+      {userTeam ? (
+        <TeamDetail userTeam={userTeam} competitionId={id} />
+      ) : (
+        <>
+          <CompetitionTeamNavbar id={id} />
 
-      <div className="bg-blue-100 px-6 py-8 rounded-b-xl">
-        {userTeam ? (
-          <TeamDetail userTeam={userTeam} competitionId={id} />
-        ) : (
-          <>
-            <CompetitionTeamNavbar id={id} />
+          <div className="flex flex-col gap-6 mt-4">
+            <Input
+              label="Nama Tim"
+              name="name"
+              placeholder="Nama Tim"
+              type="text"
+              value={createTeamForm.values.name}
+              onChange={createTeamForm.handleChange}
+              error={
+                createTeamForm.touched.name &&
+                createTeamForm.errors.name !== undefined
+              }
+              helperText={
+                createTeamForm.touched.name && createTeamForm.errors.name
+              }
+            />
 
-            <div className="flex flex-col gap-6 mt-4">
-              <Input
-                label="Nama Tim"
-                name="name"
-                placeholder="Nama Tim"
-                type="text"
-                value={createTeamForm.values.name}
-                onChange={createTeamForm.handleChange}
-                error={
-                  createTeamForm.touched.name &&
-                  createTeamForm.errors.name !== undefined
-                }
-                helperText={
-                  createTeamForm.touched.name && createTeamForm.errors.name
-                }
-              />
-
-              <div>
-                <label className="text-lg">Tema Tim</label>
-                <div className="flex items-center overflow-x-scroll gap-2 mt-2">
-                  {avatars.map((avatar, i) => (
-                    <AvatarItem
-                      key={i}
-                      data={avatar}
-                      isActive={selectedAvatar?.id === avatar.id}
-                      onClick={() => {
-                        setSelectedAvatar(avatar);
-                        createTeamForm.setFieldValue("avatarId", avatar.id);
-                      }}
-                    />
-                  ))}
-                </div>
+            <div>
+              <label className="text-lg">Tema Tim</label>
+              <div className="flex items-center overflow-x-scroll gap-2 mt-2">
+                {avatars.map((avatar, i) => (
+                  <AvatarItem
+                    key={i}
+                    data={avatar}
+                    isActive={selectedAvatar?.id === avatar.id}
+                    onClick={() => {
+                      setSelectedAvatar(avatar);
+                      createTeamForm.setFieldValue("avatarId", avatar.id);
+                    }}
+                  />
+                ))}
               </div>
-
-              <div>
-                <label className="text-lg">
-                  Pilih Karakter ({selectedAvatar?.name})
-                </label>
-                <div className="flex items-center overflow-x-scroll gap-2 mt-2">
-                  {characters.map((character, i) => (
-                    <AvatarItem
-                      key={i}
-                      data={character}
-                      isActive={
-                        createTeamForm.values.characterId === character.id
-                      }
-                      onClick={() => {
-                        createTeamForm.setFieldValue(
-                          "characterId",
-                          character.id
-                        );
-                      }}
-                    />
-                  ))}
-                </div>
-              </div>
-
-              <form onSubmit={createTeamForm.handleSubmit}>
-                <LoadingButton loading={isOnRequest}>Simpan</LoadingButton>
-              </form>
             </div>
-          </>
-        )}
-      </div>
-    </div>
+
+            <div>
+              <label className="text-lg">
+                Pilih Karakter ({selectedAvatar?.name})
+              </label>
+              <div className="flex items-center overflow-x-scroll gap-2 mt-2">
+                {characters.map((character, i) => (
+                  <AvatarItem
+                    key={i}
+                    data={character}
+                    isActive={
+                      createTeamForm.values.characterId === character.id
+                    }
+                    onClick={() => {
+                      createTeamForm.setFieldValue("characterId", character.id);
+                    }}
+                  />
+                ))}
+              </div>
+            </div>
+
+            <form onSubmit={createTeamForm.handleSubmit}>
+              <LoadingButton loading={isOnRequest}>Simpan</LoadingButton>
+            </form>
+          </div>
+        </>
+      )}
+    </CompetitionPage>
   );
 }
