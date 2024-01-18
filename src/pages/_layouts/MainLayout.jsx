@@ -42,8 +42,10 @@ export default function MainLayout({ children }) {
       {/* Config React Toastify END */}
 
       <Navbar />
-      <div className="p-6 pt-20 text-black bg-blue-50 min-h-screen">
-        {children}
+      <div className="bg-gray-300 flex justify-center">
+        <div className="p-6 pt-20 text-black bg-blue-50 min-h-screen max-w-sm">
+          {children}
+        </div>
       </div>
       <Footer />
     </>
