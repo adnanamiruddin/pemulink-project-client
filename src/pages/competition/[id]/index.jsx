@@ -47,7 +47,9 @@ export default function CreateTeam() {
       setIsOnRequest(false);
       if (response) {
         createTeamForm.resetForm();
-        toast.success("Tim berhasil dibuat");
+        toast.success(
+          "Tim berhasil dibuat. Anda akan diarahkan ke halaman tim"
+        );
         setTimeout(() => {
           router.reload();
         }, 3000);
@@ -63,6 +65,7 @@ export default function CreateTeam() {
       dispatch(setGlobalLoading(false));
       if (response) {
         setAvatars(response.reverse());
+        createTeamForm.setFieldValue("avatarId", response[0].id);
         setSelectedAvatar(response[0]);
       }
       if (error) toast.error(error.message);

@@ -13,6 +13,7 @@ import avatarsApi from "@/api/modules/avatars.api";
 import teamsApi from "@/api/modules/teams.api";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
+import defaultTeamMemberIcon from "../../../public/default-team-member-icon.svg";
 
 export default function TeamDetail({ userTeam, competitionId }) {
   const router = useRouter();
@@ -34,15 +35,17 @@ export default function TeamDetail({ userTeam, competitionId }) {
       if (isOnRequest) return;
       setIsOnRequest(true);
       const { response, error } = await teamsApi.chooseCharacter({
-        competitionId: id,
+        competitionId,
         teamId: userTeam.id,
         ...values,
       });
       setIsOnRequest(false);
       if (response) {
         chooseCharacterForm.resetForm();
-        toast.success("Berhasil memilih karakter");
-        router.push(`/competition/${id}`);
+        toast.success("Berhasil memilih karakter. Halaman akan direfresh");
+        setTimeout(() => {
+          router.reload();
+        }, 3000);
       }
       if (error) setErrorMessage(error.message);
     },
@@ -149,20 +152,20 @@ export default function TeamDetail({ userTeam, competitionId }) {
           <h4 className="font-semibold mt-2">{userTeam.name}</h4>
         </div>
         {userTeam.teamMembers.map((member, i) => (
-          <div key={i} className="flex justify-between items-center gap-4">
+          <div key={i} className="flex justify-between items-center gap-3">
             <div className="w-1/6">
               <Image
-                src={member.characterURL}
+                src={member.characterURL || defaultTeamMemberIcon}
                 alt={member.characterName}
                 width={100}
                 height={100}
                 className="rounded-lg"
               />
             </div>
-            <h4 className="font-bold">
+            <h4 className="font-bold text-sm">
               {member.firstName + " " + member.lastName}
             </h4>
-            <p className="text-base">
+            <p className="text-xs">
               {member.userId === user.id
                 ? "Anda"
                 : member.role === "leader"
@@ -170,7 +173,7 @@ export default function TeamDetail({ userTeam, competitionId }) {
                 : "Bergabung"}
             </p>
             <span
-              className={`text-sm p-2 rounded-xl font-medium ${
+              className={`text-xs p-1.5 px-2 rounded-lg ${
                 member.status === "accepted" ? "bg-green-500" : "bg-amber-400"
               }`}
             >

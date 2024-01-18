@@ -40,8 +40,10 @@ export default function JoinTeam() {
       setIsOnRequest(false);
       if (response) {
         joinTeamForm.resetForm();
-        toast.success("Berhasil bergabung ke tim");
-        router.push(`/competition/${id}/join`);
+        toast.success("Berhasil bergabung ke tim. Anda akan diarahkan ke tim");
+        setTimeout(() => {
+          router.reload();
+        }, 3000);
       }
       if (error) setErrorMessage(error.message);
     },
