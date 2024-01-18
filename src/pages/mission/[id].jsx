@@ -45,7 +45,9 @@ export default function MissionDetail() {
             <Link href="/dashboard">
               <AiOutlineArrowLeft className="text-xl" />
             </Link>
-            <h1 className="text-xl font-semibold">Misi Mingguan</h1>
+            <h1 className="text-xl font-semibold">
+              Misi {mission.competitionId ? "Spesial" : "Mingguan"}
+            </h1>
           </div>
 
           <div className="flex flex-col justify-center items-center gap-1">
