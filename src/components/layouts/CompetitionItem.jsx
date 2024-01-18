@@ -3,28 +3,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { CiBullhorn } from "react-icons/ci";
-import { LuTimer } from "react-icons/lu";
 import { toast } from "react-toastify";
 import missionPointIcon from "../../../public/mission-point-icon.svg";
+import Timer from "../functions/Timer";
 
 export default function CompetitionItem({ competition }) {
-  const [timeRemaining, setTimeRemaining] = useState(calculateTimeRemaining());
   const [missions, setMissions] = useState([]);
-
-  function calculateTimeRemaining() {
-    const endTime = new Date(competition.endAt).getTime();
-    const now = new Date().getTime();
-    const difference = endTime - now;
-
-    const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-    const hours = Math.floor(
-      (difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-    );
-    const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-
-    return { days, hours, minutes, seconds };
-  }
 
   useEffect(() => {
     const fetchMissions = async () => {
@@ -38,30 +22,19 @@ export default function CompetitionItem({ competition }) {
     fetchMissions();
   }, [competition]);
 
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      setTimeRemaining(calculateTimeRemaining());
-    }, 1000);
-    // Cleaning interval when components are unmounted
-    return () => clearInterval(intervalId);
-  }, []);
-
   return (
     <div className="bg-white my-8 p-8 -mx-6">
-      <h3 className="flex items-center gap-2">
+      <h3 className="flex items-center gap-2 mb-3">
         <CiBullhorn className="text-3xl" />
         <span className="font-medium text-xl">{competition.name}</span>
       </h3>
 
-      <h6 className="text-sm mt-8 flex items-center gap-2">
-        Berakhir dalam
-        <span className="bg-sky-400 rounded-full px-3 py-1 text-white text-base flex items-center gap-1">
-          <LuTimer />
-          {`${timeRemaining.days} : ${timeRemaining.hours} : ${timeRemaining.minutes} : ${timeRemaining.seconds}`}
-        </span>
-      </h6>
+      <div className="flex items-center gap-2">
+        <p className="text-sm">Berakhir dalam</p>
+        <Timer data={competition} color="blue" />
+      </div>
 
-      <div className="mt-4 flex items-center gap-2">
+      <div className="mt-10 flex items-center gap-2">
         <div className="flex flex-col gap-4 basis-1/3">
           <h5 className="font-medium text-2xl">{competition.subTitle}</h5>
           <p className="text-sm">Selesaikan misi dan dapatkan tambahan poin</p>

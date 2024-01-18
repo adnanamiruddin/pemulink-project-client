@@ -53,7 +53,7 @@ export default function Dashboard() {
 
         <UserBadge user={user} level={level} />
 
-        <h2 className="font-bold text-2xl">Misi Mingguan</h2>
+        {/* <h2 className="font-bold text-2xl">Misi Mingguan</h2> */}
         {missions.map((mission, i) => (
           <WeeklyMissionItem key={i} mission={mission} />
         ))}
