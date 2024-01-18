@@ -1,5 +1,5 @@
 import missionsApi from "@/api/modules/missions.api";
-import ReqModal from "@/components/layouts/ReqModal";
+import ReqModal from "@/components/functions/ReqModal";
 import { setGlobalLoading } from "@/redux/features/globalLoadingSlice";
 import Image from "next/image";
 import Link from "next/link";
@@ -52,7 +52,10 @@ export default function MissionDetail() {
 
           <div className="flex flex-col justify-center items-center gap-1">
             <p className="text-xs">Berakhir dalam</p>
-            <Timer data={mission.endAt} />
+            <Timer
+              data={mission.endAt}
+              color={mission.competitionId ? "blue" : ""}
+            />
           </div>
         </div>
       </div>

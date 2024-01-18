@@ -6,8 +6,8 @@ import Timer from "../functions/Timer";
 
 export default function WeeklyMissionItem({ mission }) {
   return (
-    <div className="bg-white p-6 rounded-xl">
-      <div className="flex justify-between">
+    <div className="bg-white py-6 px-5 rounded-xl">
+      <div className="flex justify-between items-center">
         <div className="flex items-center gap-2.5">
           <PiBroomDuotone className="text-3xl" />
           <p className="font-medium text-lg">Misi Mingguan</p>

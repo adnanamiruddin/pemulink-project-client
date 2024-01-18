@@ -34,34 +34,39 @@ export default function Navbar() {
       </div>
 
       <div className="flex-none gap-2">
-        <IoEllipsisVertical className="text-black text-2xl" />
-        <button onClick={handleLogout}>Logout</button>
-
-        {/* {user ? (
+        {user ? (
           <div className="dropdown dropdown-end">
-            <div tabIndex={0} role="button" className="btn btn-ghost">
-              <h3 className="text-white text-xl">{user.fullName}</h3>
+            <div tabIndex={0} role="button">
+              <IoEllipsisVertical className="text-black text-2xl" />
             </div>
             <ul
               tabIndex={0}
-              className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
+              className="mt-3 z-[1] p-2 shadow-lg menu menu-sm dropdown-content bg-gray-50 text-black rounded-box w-52 gap-1 border border-gray-400"
             >
               <li>
-                <Link href="/dashboard/profile">Profile</Link>
+                <Link href="/dashboard">Beranda</Link>
               </li>
               <li>
-                <Link href="/">Settings</Link>
+                <Link href="/dashboard/profile">Profil</Link>
               </li>
               <li>
-                <button onClick={handleLogout}>Logout</button>
+                <Link href="/dashboard/">Berlangganan</Link>
+              </li>
+              <li>
+                <button onClick={handleLogout} className="text-red-500">
+                  Logout
+                </button>
               </li>
             </ul>
           </div>
         ) : (
-          <Link href="/login" className="btn btn-ghost">
+          <Link
+            href="/login"
+            className="btn-ghost text-gray-500 font-medium text-lg px-4 py-2 rounded-xl hover:text-gray-700"
+          >
             Login
           </Link>
-        )} */}
+        )}
       </div>
     </div>
   );
