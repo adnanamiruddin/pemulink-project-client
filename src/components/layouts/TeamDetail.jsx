@@ -151,6 +151,7 @@ export default function TeamDetail({ userTeam, competitionId }) {
           />
           <h4 className="font-semibold mt-2">{userTeam.name}</h4>
         </div>
+
         {userTeam.teamMembers.map((member, i) => (
           <div key={i} className="flex justify-between items-center gap-3">
             <div className="w-1/6">
