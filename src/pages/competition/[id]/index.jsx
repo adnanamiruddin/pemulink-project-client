@@ -71,7 +71,7 @@ export default function CreateTeam() {
       if (error) toast.error(error.message);
     };
     fetchAvatars();
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     const fetchCharacters = async () => {

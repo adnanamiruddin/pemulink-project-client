@@ -3,7 +3,7 @@ import { HiOutlineInformationCircle } from "react-icons/hi2";
 
 export default function DashboardNewAccInfo() {
   return (
-    <div className="bg-red-400 text-white px-3 py-4 rounded-xl flex justify-between items-center gap-3">
+    <div className="bg-red-400 text-white px-3 py-4 rounded-2xl flex justify-between items-center gap-3">
       <div>
         <HiOutlineInformationCircle className="text-3xl" />
       </div>
