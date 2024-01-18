@@ -64,6 +64,25 @@ export default function TeamDetail({ userTeam, competitionId }) {
     if (isOnRequest) return;
     e.preventDefault();
     setIsOnRequest(true);
+    // Validate minimum 2 members
+    if (userTeam.teamMembers.length < 2) {
+      toast.error("Tim harus memiliki setidaknya 2 anggota");
+      setTimeout(() => {
+        setIsOnRequest(false);
+      }, 500);
+      return;
+    }
+    // Validate if all members already choose character
+    if (
+      userTeam.teamMembers.filter((member) => member.status === "accepted")
+        .length !== userTeam.teamMembers.length
+    ) {
+      toast.error("Semua anggota tim harus memilih karakter");
+      setTimeout(() => {
+        setIsOnRequest(false);
+      }, 500);
+      return;
+    }
     const { response, error } = await teamsApi.startTeam({
       competitionId,
       teamId: userTeam.id,
@@ -118,7 +137,7 @@ export default function TeamDetail({ userTeam, competitionId }) {
         </div>
       </div>
 
-      <div className="bg-white p-6 rounded-xl flex flex-col justify-between gap-4">
+      <div className="bg-white py-6 px-4 rounded-xl flex flex-col justify-between gap-4">
         <div className="flex flex-col justify-center items-center">
           <Image
             src={userTeam.avatarURL}

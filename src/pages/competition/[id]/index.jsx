@@ -48,7 +48,9 @@ export default function CreateTeam() {
       if (response) {
         createTeamForm.resetForm();
         toast.success("Tim berhasil dibuat");
-        router.push(`/competition/${id}`);
+        setTimeout(() => {
+          router.reload();
+        }, 3000);
       }
       if (error) toast.error(error.message);
     },
