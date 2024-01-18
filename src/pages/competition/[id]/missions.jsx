@@ -5,20 +5,26 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { HiOutlineInformationCircle } from "react-icons/hi2";
 import { toast } from "react-toastify";
+import missionPointIcon from "../../../../public/mission-point-icon.svg";
+import Link from "next/link";
+import { useDispatch } from "react-redux";
+import { setGlobalLoading } from "@/redux/features/globalLoadingSlice";
 
 export default function CompetitionMissions() {
   const router = useRouter();
   const { id } = router.query;
+  const dispatch = useDispatch();
 
   const [missions, setMissions] = useState([]);
 
   useEffect(() => {
     const fetchMissions = async () => {
+      dispatch(setGlobalLoading(true));
       const { response, error } =
         await competitionsApi.getAllMissionsByCompetitionId({
           id,
         });
-      console.log(response);
+      dispatch(setGlobalLoading(false));
       if (response) setMissions(response);
       if (error) toast.error(error.message);
     };
@@ -54,7 +60,28 @@ export default function CompetitionMissions() {
               <h4 className="font-semibold">{mission.title}</h4>
               <p className="text-xs text-gray-400 mt-1">{mission.subTitle}</p>
 
-              <div className="flex"></div>
+              <div className="flex justify-between items-center mt-3">
+                <h6 className="text-blue-500 text-xs flex items-center gap-1 font-medium">
+                  <Image
+                    src={missionPointIcon}
+                    alt="Mission Point Icon"
+                    className="w-3"
+                  />
+                  {mission.pointReward} Poin / Kg
+                </h6>
+                <h6 className="text-cyan-400 text-xs font-medium">
+                  {mission.xpReward} exp
+                </h6>
+              </div>
+
+              <div className="mt-3">
+                <Link
+                  href={`/mission/${mission.id}`}
+                  className="bg-blue-500 text-white rounded-lg p-1 px-3 text-xs hover:bg-blue-700"
+                >
+                  Lihat Selengkapnya
+                </Link>
+              </div>
             </div>
           </div>
         ))}
