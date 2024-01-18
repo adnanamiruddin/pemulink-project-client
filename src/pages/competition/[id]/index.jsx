@@ -11,10 +11,13 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import * as Yup from "yup";
 import TeamDetail from "@/components/layouts/TeamDetail";
+import { useDispatch } from "react-redux";
+import { setGlobalLoading } from "@/redux/features/globalLoadingSlice";
 
 export default function CreateTeam() {
   const router = useRouter();
   const { id } = router.query;
+  const dispatch = useDispatch();
 
   const [userTeam, setUserTeam] = useState(null);
 
@@ -35,6 +38,7 @@ export default function CreateTeam() {
       characterId: Yup.string().required("Karakter harus dipilih"),
     }),
     onSubmit: async (values) => {
+      if (isOnRequest) return;
       setIsOnRequest(true);
       const { response, error } = await teamsApi.createTeam({
         competitionId: id,
@@ -52,7 +56,9 @@ export default function CreateTeam() {
 
   useEffect(() => {
     const fetchAvatars = async () => {
+      dispatch(setGlobalLoading(true));
       const { response, error } = await avatarsApi.getAllAvatars();
+      dispatch(setGlobalLoading(false));
       if (response) {
         setAvatars(response.reverse());
         setSelectedAvatar(response[0]);
@@ -80,7 +86,7 @@ export default function CreateTeam() {
 
       <div className="bg-blue-100 px-6 py-8 rounded-b-xl">
         {userTeam ? (
-          <TeamDetail userTeam={userTeam} />
+          <TeamDetail userTeam={userTeam} competitionId={id} />
         ) : (
           <>
             <CompetitionTeamNavbar id={id} />

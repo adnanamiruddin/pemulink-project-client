@@ -2,17 +2,21 @@ import teamsApi from "@/api/modules/teams.api";
 import CompetitionHeader from "@/components/layouts/CompetitionHeader";
 import CompetitionTeamNavbar from "@/components/layouts/CompetitionTeamNavbar";
 import TeamDetail from "@/components/layouts/TeamDetail";
+import { selectUser } from "@/redux/features/userSlice";
 import { useFormik } from "formik";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { IoIosLink } from "react-icons/io";
 import { IoShareSocialOutline } from "react-icons/io5";
+import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import * as Yup from "yup";
 
 export default function JoinTeam() {
   const router = useRouter();
   const { id } = router.query;
+
+  const { user } = useSelector(selectUser);
 
   const [userTeam, setUserTeam] = useState(null);
 
@@ -27,6 +31,7 @@ export default function JoinTeam() {
       code: Yup.string().required("Kode harus diisi"),
     }),
     onSubmit: async (values) => {
+      if (isOnRequest) return;
       setIsOnRequest(true);
       const { response, error } = await teamsApi.joinTeam({
         competitionId: id,
@@ -48,7 +53,7 @@ export default function JoinTeam() {
 
       <div className="bg-blue-100 px-6 py-8 rounded-b-xl flex flex-col gap-6">
         {userTeam ? (
-          <TeamDetail userTeam={userTeam} />
+          <TeamDetail userTeam={userTeam} competitionId={id} />
         ) : (
           <>
             <CompetitionTeamNavbar id={id} />

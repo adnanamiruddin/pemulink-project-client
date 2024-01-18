@@ -5,6 +5,8 @@ const teamsEndpoint = {
   joinTeam: ({ competitionId }) => `/competitions/teams/${competitionId}/join`,
   teamById: ({ competitionId, teamId }) =>
     `/competitions/teams/${competitionId}/${teamId}`,
+  startTeam: ({ competitionId, teamId }) =>
+    `/competitions/teams/${competitionId}/${teamId}/start`,
 };
 
 const teamsApi = {
@@ -56,6 +58,17 @@ const teamsApi = {
     try {
       const response = await privateClient.get(
         teamsEndpoint.teamById({ competitionId, teamId })
+      );
+      return { response };
+    } catch (error) {
+      return { error };
+    }
+  },
+
+  startTeam: async ({ competitionId, teamId }) => {
+    try {
+      const response = await privateClient.put(
+        teamsEndpoint.startTeam({ competitionId, teamId })
       );
       return { response };
     } catch (error) {

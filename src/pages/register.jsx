@@ -24,7 +24,7 @@ export default function Register() {
 
   const { user } = useSelector(selectUser);
 
-  const [isLoginRequest, setIsLoginRequest] = useState(false);
+  const [isOnRequest, setIsOnRequest] = useState(false);
   const [errorMessage, setErrorMessage] = useState(undefined);
 
   const icons = [googleIcon, microsoftIcon, facebookIcon, tiktokIcon];
@@ -54,7 +54,8 @@ export default function Register() {
         .required("Konfirmasi password harus diisi"),
     }),
     onSubmit: async (values) => {
-      setIsLoginRequest(true);
+      if (isOnRequest) return;
+      setIsOnRequest(true);
       try {
         const userCredential = await createUserWithEmailAndPassword(
           auth,
@@ -78,7 +79,7 @@ export default function Register() {
       } catch (error) {
         setErrorMessage(error.message);
       } finally {
-        setIsLoginRequest(false);
+        setIsOnRequest(false);
       }
     },
   });
@@ -186,7 +187,7 @@ export default function Register() {
             }
           />
           <div></div>
-          <LoadingButton loading={isLoginRequest}>Buat Akun</LoadingButton>
+          <LoadingButton loading={isOnRequest}>Buat Akun</LoadingButton>
           <p className="text-justify text-xs text-gray-400">
             Dengan melanjutkan, Anda menyetujui{" "}
             <span className="text-blue-500">

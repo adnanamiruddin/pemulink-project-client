@@ -24,7 +24,7 @@ export default function Login() {
 
   const { user } = useSelector(selectUser);
 
-  const [isLoginRequest, setIsLoginRequest] = useState(false);
+  const [isOnRequest, setIsOnRequest] = useState(false);
   const [errorMessage, setErrorMessage] = useState(undefined);
 
   const icons = [googleIcon, microsoftIcon, facebookIcon, tiktokIcon];
@@ -45,7 +45,8 @@ export default function Login() {
         .required("Password harus diisi"),
     }),
     onSubmit: async (values) => {
-      setIsLoginRequest(true);
+      if (isOnRequest) return;
+      setIsOnRequest(true);
       try {
         const userCredential = await signInWithEmailAndPassword(
           auth,
@@ -67,7 +68,7 @@ export default function Login() {
       } catch (error) {
         setErrorMessage(error.message);
       } finally {
-        setIsLoginRequest(false);
+        setIsOnRequest(false);
       }
     },
   });
@@ -132,7 +133,7 @@ export default function Login() {
           <Link href="/" className="mb-3 text-end">
             <p className="text-blue-600">Lupa kata sandi?</p>
           </Link>
-          <LoadingButton loading={isLoginRequest}>Masuk</LoadingButton>
+          <LoadingButton loading={isOnRequest}>Masuk</LoadingButton>
         </form>
 
         {errorMessage ? (

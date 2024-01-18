@@ -43,6 +43,7 @@ export default function Profile() {
       phoneNumber: Yup.string().required("Nomor telepon (WA) harus diisi"),
     }),
     onSubmit: async (values) => {
+      if (isOnRequest) return;
       setIsOnRequest(true);
       const { response, error } = await userApi.updateProfile(values);
       setIsOnRequest(false);
