@@ -12,6 +12,8 @@ import { AiOutlineArrowLeft } from "react-icons/ai";
 import Timer from "@/components/functions/Timer";
 import { GoTriangleUp } from "react-icons/go";
 import dayjs from "dayjs";
+import { FaSadCry } from "react-icons/fa";
+
 import "dayjs/locale/id";
 
 dayjs.locale("id");
@@ -32,7 +34,7 @@ export default function MissionDetail() {
       if (response) setMission(response);
       if (error) toast.error(error.message);
     };
-    fetchMissions();
+    if (id) fetchMissions();
   }, [id, dispatch]);
 
   return mission ? (
@@ -110,11 +112,22 @@ export default function MissionDetail() {
         {showDescription ? (
           <p className="text-sm text-justify">{mission.description}</p>
         ) : null}
-      </div>
 
-      <ReqModal mission={mission} />
+        <ReqModal mission={mission} />
+      </div>
     </>
   ) : (
-    <div>404</div>
+    <div className="bg-white flex flex-col justify-center items-center p-10 gap-6 rounded-2xl mt-[15vh]">
+      <FaSadCry className="text-9xl text-gray-700" />
+      <p className="text-lg text-center">
+        Misi yang kamu cari tidak dapat ditemukan
+      </p>
+      <Link
+        href="/dashboard"
+        className="btn bg-blue-500 border-0 text-white rounded-lg px-7 text-lg hover:bg-blue-700"
+      >
+        Kembali ke Dashboard
+      </Link>
+    </div>
   );
 }

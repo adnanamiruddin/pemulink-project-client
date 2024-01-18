@@ -37,7 +37,11 @@ export default function WeeklyMissionItem({ mission }) {
 
           <div className="flex justify-between items-center mt-3">
             <h6 className="text-blue-500 text-xs flex items-center gap-1 font-medium">
-              <Image src={missionPointIcon} alt="Mission Point Icon" />
+              <Image
+                src={missionPointIcon}
+                alt="Mission Point Icon"
+                className="w-3"
+              />
               {mission.pointReward} Poin / Kg
             </h6>
             <h6 className="text-cyan-400 text-xs font-medium">
